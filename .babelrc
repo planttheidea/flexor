@@ -1,0 +1,20 @@
+{
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-remove-prop-types"
+      ]
+    }
+  },
+  "presets": [
+    [
+      "env",
+      {
+        "loose": true,
+        "modules": false
+      }
+    ],
+    "react",
+    "stage-2"
+  ]
+}
