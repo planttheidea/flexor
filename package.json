@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "glamor": "^2.20.32",
-    "moize": "^3.2.2"
+    "moize": "^3.3.0"
   },
   "description": "Handle flexbox in a natural React way",
   "devDependencies": {
