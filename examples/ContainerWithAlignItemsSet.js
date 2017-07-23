@@ -44,7 +44,7 @@ class ContainerWithAlignItemsSet extends PureComponent {
 
           <FlexItem
             className="child"
-            sizeTo={50}
+            sizeTo="50"
           >
             50px width child
           </FlexItem>

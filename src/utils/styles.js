@@ -6,7 +6,7 @@ import {
   ALIGN_CONTENT_MAP,
   ALIGN_ITEMS_COLUMN_FIX,
   ALIGN_ITEMS_MAP,
-  ALIGN_MAP,
+  INLINE_ALIGN_MAP,
   DEFAULT_CONTAINER,
   DIRECTION_MAP,
   DISPLAY_MAP,
@@ -291,7 +291,7 @@ export const getSizeToOverrideStyles = (props) => {
  * @param {boolean} isContainer is the component a container component
  * @returns {Array<Object>} the starting styles of the component
  */
-export const getStartingStyles = ({align, inline}, defaultStyle, isContainer) => {
+export const getStartingStyles = ({inline, inlineAlign}, defaultStyle, isContainer) => {
   if (!isContainer || !inline) {
     return [defaultStyle];
   }
@@ -300,7 +300,7 @@ export const getStartingStyles = ({align, inline}, defaultStyle, isContainer) =>
     {
       ...defaultStyle,
       ...DISPLAY_MAP.inline,
-      ...ALIGN_MAP[align]
+      ...INLINE_ALIGN_MAP[inlineAlign]
     }
   ];
 };
@@ -353,10 +353,11 @@ export const createGetCompleteStyles = (defaultStyle, transforms, isContainer) =
     const styles = transforms.reduce((styles, transform) => {
       const style = transform(props);
 
-      return !style ? styles : [
-        ...styles,
-        style
-      ];
+      if (style) {
+        styles.push(style);
+      }
+
+      return styles;
     }, getStartingStyles(props, defaultStyle, isContainer));
 
     return css(!props.sizeTo ? styles : [

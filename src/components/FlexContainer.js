@@ -14,7 +14,6 @@ import {
 } from '../utils/styles';
 
 const INTERNAL_PROPS = {
-  align: true,
   alignContent: true,
   alignItems: true,
   column: true,
@@ -22,8 +21,8 @@ const INTERNAL_PROPS = {
   direction: true,
   justifyContent: true,
   inline: true,
-  inlineBottom: true,
-  inlineCenter: true,
+  inlineAlign: true,
+  row: true,
   rowReverse: true,
   wrap: true
 };
@@ -32,7 +31,6 @@ const getCachedContainerStyles = moize.react(getContainerStyles);
 
 class FlexContainer extends PureComponent {
   static propTypes = {
-    align: PropTypes.string,
     alignContent: PropTypes.string,
     alignItems: PropTypes.string,
     children: PropTypes.node,
@@ -45,8 +43,8 @@ class FlexContainer extends PureComponent {
     ]),
     justifyContent: PropTypes.string,
     inline: PropTypes.bool,
-    inlineBottom: PropTypes.bool,
-    inlineCenter: PropTypes.bool,
+    inlineAlign: PropTypes.string,
+    row: PropTypes.bool,
     rowReverse: PropTypes.bool,
     wrap: PropTypes.oneOfType([
       PropTypes.bool,

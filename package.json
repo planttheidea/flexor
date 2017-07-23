@@ -27,7 +27,7 @@
     "url": "https://github.com/planttheidea/flexor/issues"
   },
   "dependencies": {
-    "glamor": "^2.20.30",
+    "glamor": "^2.20.32",
     "moize": "^3.2.2"
   },
   "description": "Handle flexbox in a natural React way",
@@ -96,12 +96,12 @@
     "dist": "npm run clean:dist && npm run build && npm run build:minified",
     "lint": "NODE_ENV=test eslint src",
     "lint:fix": "npm run lint -- --fix",
-    "prepublish": "in-publish && npm run prepublish:compile",
-    "prepublish:compile": "npm run lint && npm run test:coverage && npm run transpile:lib && npm run transpile:es && npm run dist",
+    "prepublish": "npm run lint && npm run test:coverage && npm run transpile:lib && npm run transpile:es && npm run dist",
     "prettify": "prettier --single-quote --no-bracket-spacing --write 'src/*.js'",
     "start": "npm run dev:dashboard",
     "test": "NODE_PATH=. NODE_ENV=test ava",
     "test:coverage": "nyc npm test",
+    "test:update": "npm test -- --update-snapshots",
     "test:watch": "npm test -- --watch",
     "transpile:lib": "npm run clean:lib && babel src --out-dir lib",
     "transpile:es": "npm run clean:es && BABEL_ENV=es babel src --out-dir es"

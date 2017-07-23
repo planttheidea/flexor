@@ -116,10 +116,10 @@ class Standard extends PureComponent {
           <h4>inline column (with align set to top)</h4>
 
           <FlexContainer
-            align="top"
             className="container container-inline"
             column
             inline
+            inlineAlign="top"
           >
             <FlexItem className="child">
               First item
@@ -131,10 +131,10 @@ class Standard extends PureComponent {
           </FlexContainer>
 
           <FlexContainer
-            align="top"
             className="container container-inline"
             column
             inline
+            inlineAlign="top"
           >
             <FlexItem className="child">
               <h4>Headline first item</h4>

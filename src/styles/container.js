@@ -72,9 +72,9 @@ export const JUSTIFY_CONTENT_MAP = getMappedStyles(JUSTIFY_CONTENT_VALUES, 'just
 // custom align (only when inline-flex)
 
 /**
- * @constant {Array<string>} ALIGN_VALUES
+ * @constant {Array<string>} INLINE_ALIGN_VALUES
  */
-export const ALIGN_VALUES = {
+export const INLINE_ALIGN_VALUES = {
   baseline: 'baseline',
   bottom: 'bottom',
   center: 'center',
@@ -82,9 +82,9 @@ export const ALIGN_VALUES = {
 };
 
 /**
- * @constant {Object} ALIGN_MAP
+ * @constant {Object} INLINE_ALIGN_MAP
  */
-export const ALIGN_MAP = getMappedStyles(ALIGN_VALUES, 'verticalAlign');
+export const INLINE_ALIGN_MAP = getMappedStyles(INLINE_ALIGN_VALUES, 'verticalAlign');
 
 // custom align content
 
@@ -96,7 +96,8 @@ export const ALIGN_CONTENT_VALUES = {
   between: 'space-between',
   center: 'center',
   end: 'flex-end',
-  start: 'flex-start'
+  start: 'flex-start',
+  stretch: 'stretch'
 };
 
 /**

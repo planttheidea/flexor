@@ -38,12 +38,17 @@ class FlexItem extends PureComponent {
     ]),
     grow: PropTypes.oneOfType([
       PropTypes.bool,
-      PropTypes.number
+      PropTypes.number,
+      PropTypes.string
     ]),
-    order: PropTypes.number,
+    order: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
     shrink: PropTypes.oneOfType([
       PropTypes.bool,
-      PropTypes.number
+      PropTypes.number,
+      PropTypes.string
     ]),
     sizeTo: PropTypes.oneOfType([
       PropTypes.number,

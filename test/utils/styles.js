@@ -541,7 +541,7 @@ test('if getSizeToOverrideStyles returns the correct combination of basis, grow,
 
 test('if getStartingStyles returns only the defaultStyle if isContainer is false', (t) => {
   const props = {
-    align: 'center',
+    inlineAlign: 'center',
     inline: false
   };
   const defaultStyle = {
@@ -558,7 +558,7 @@ test('if getStartingStyles returns only the defaultStyle if isContainer is false
 
 test('if getStartingStyles returns only the defaultStyle if inline is false', (t) => {
   const props = {
-    align: 'center',
+    inlineAlign: 'center',
     inline: false
   };
   const defaultStyle = {
@@ -573,9 +573,9 @@ test('if getStartingStyles returns only the defaultStyle if inline is false', (t
   ]);
 });
 
-test('if getStartingStyles returns the merged defaultStyle with inline and ALIGN_MAP style if isContainer and inline are true', (t) => {
+test('if getStartingStyles returns the merged defaultStyle with inline and INLINE_ALIGN_MAP style if isContainer and inline are true', (t) => {
   const props = {
-    align: 'center',
+    inlineAlign: 'center',
     inline: true
   };
   const defaultStyle = {
@@ -589,7 +589,7 @@ test('if getStartingStyles returns the merged defaultStyle with inline and ALIGN
     {
       ...defaultStyle,
       ...containerStyleConstants.DISPLAY_MAP.inline,
-      ...containerStyleConstants.ALIGN_MAP[props.align]
+      ...containerStyleConstants.INLINE_ALIGN_MAP[props.inlineAlign]
     }
   ]);
 });
