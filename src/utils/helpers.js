@@ -1,4 +1,18 @@
 /**
+ * @function getMappedSizePrefixedProperty
+ *
+ * @description
+ * get the prefixed property based on prefix and size
+ *
+ * @param {string} prefix the prefix to always apply
+ * @param {number} size the size for the property
+ * @returns {string} the appropriate prefxed property
+ */
+export const getMappedSizePrefixedProperty = (prefix, size) => {
+  return size < 0 ? `${prefix}_NEGATIVE_${Math.abs(size)}` : `${prefix}_${size}`;
+};
+
+/**
  * @function getMappedSizeStyles
  *
  * @description
@@ -13,7 +27,7 @@ export const getMappedSizeStyles = (sizes, prefix, property) => {
   return sizes.reduce((map, size) => {
     return {
       ...map,
-      [`${prefix}_${size < 0 ? `NEGATIVE_${size}` : size}`]: {
+      [getMappedSizePrefixedProperty(prefix, size)]: {
         [property]: size
       }
     };

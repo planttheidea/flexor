@@ -21,6 +21,11 @@ import {
   SHRINK_MAP
 } from '../styles/item';
 
+// utils
+import {
+  getMappedSizePrefixedProperty
+} from './helpers';
+
 /**
  * @function createGetDynamicStyle
  *
@@ -40,13 +45,13 @@ export const createGetDynamicStyle = (map, prefix, prop, defaultProp) => {
     }
 
     const value = props[prop];
-    const prefixedProperty = `${prefix}_${value < 0 ? `NEGATIVE_${value}` : value}`;
+    const prefixedProperty = getMappedSizePrefixedProperty(prefix, value);
 
     if (map.hasOwnProperty(prefixedProperty)) {
       return map[prefixedProperty];
     }
 
-    if (defaultProp && value) {
+    if (defaultProp) {
       return map[defaultProp];
     }
   };
@@ -104,81 +109,6 @@ export const getAlignItemsStyle = ({alignItems, column}) => {
 };
 
 /**
- * @function getDirectionStyle
- *
- * @description
- * get the flex-direction styles passed
- *
- * @param {boolean} column should the flex-direction be column
- * @param {boolean} columnReverse should the flex-direction be column-reverse
- * @param {string} direction the flex-direction value
- * @param {boolean} rowReverse should the flex-direction be row-reverse
- * @returns {Object} the merged style object
- */
-export const getDirectionStyle = ({column, columnReverse, direction, rowReverse}) => {
-  if (DIRECTION_MAP.hasOwnProperty(direction)) {
-    return DIRECTION_MAP[direction];
-  }
-
-  if (column) {
-    return DIRECTION_MAP.column;
-  }
-
-  if (columnReverse) {
-    return DIRECTION_MAP.columnReverse;
-  }
-
-  if (rowReverse) {
-    return DIRECTION_MAP.rowReverse;
-  }
-};
-
-/**
- * @function getJustifyContentStyle
- *
- * @description
- * get the justify-content styles passed
- *
- * @param {string} justifyContent the value passed for justify-content
- * @returns {Object} the merged style object
- */
-export const getJustifyContentStyle = ({justifyContent}) => {
-  if (JUSTIFY_CONTENT_MAP.hasOwnProperty(justifyContent)) {
-    return JUSTIFY_CONTENT_MAP[justifyContent];
-  }
-
-  if (justifyContent) {
-    return {
-      justifyContent
-    };
-  }
-};
-
-/**
- * @function getWrapStyle
- *
- * @description
- * get the flex-wrap styles passed
- *
- * @param {boolean|string} wrap the flex-wrap value
- * @param {boolean} wrapReverse should the flex-wrap be wrap-reverse
- * @returns {Object} the merged style object
- */
-export const getWrapStyle = ({wrap, wrapReverse}) => {
-  if (WRAP_MAP.hasOwnProperty(wrap)) {
-    return WRAP_MAP[wrap];
-  }
-
-  if (wrap) {
-    return WRAP_MAP.wrap;
-  }
-
-  if (wrapReverse) {
-    return WRAP_MAP.wrapReverse;
-  }
-};
-
-/**
  * @function getAlignSelfStyle
  *
  * @description
@@ -230,6 +160,68 @@ export const getBasisStyle = (props) => {
 };
 
 /**
+ * @function getDirectionStyle
+ *
+ * @description
+ * get the flex-direction styles passed
+ *
+ * @param {boolean} column should the flex-direction be column
+ * @param {boolean} columnReverse should the flex-direction be column-reverse
+ * @param {string} direction the flex-direction value
+ * @param {boolean} row should the flex-direction be row
+ * @param {boolean} rowReverse should the flex-direction be row-reverse
+ * @returns {Object} the merged style object
+ */
+export const getDirectionStyle = ({column, columnReverse, direction, row, rowReverse}) => {
+  if (DIRECTION_MAP.hasOwnProperty(direction)) {
+    return DIRECTION_MAP[direction];
+  }
+
+  if (column) {
+    return DIRECTION_MAP.column;
+  }
+
+  if (row) {
+    return DIRECTION_MAP.row;
+  }
+
+  if (columnReverse) {
+    return DIRECTION_MAP.columnReverse;
+  }
+
+  if (rowReverse) {
+    return DIRECTION_MAP.rowReverse;
+  }
+
+  if (direction) {
+    return {
+      flexDirection: direction
+    };
+  }
+};
+
+/**
+ * @function getJustifyContentStyle
+ *
+ * @description
+ * get the justify-content styles passed
+ *
+ * @param {string} justifyContent the value passed for justify-content
+ * @returns {Object} the merged style object
+ */
+export const getJustifyContentStyle = ({justifyContent}) => {
+  if (JUSTIFY_CONTENT_MAP.hasOwnProperty(justifyContent)) {
+    return JUSTIFY_CONTENT_MAP[justifyContent];
+  }
+
+  if (justifyContent) {
+    return {
+      justifyContent
+    };
+  }
+};
+
+/**
  * @function getGrowStyle
  *
  * @description
@@ -272,7 +264,7 @@ export const getShrinkStyle = createGetDynamicStyle(SHRINK_MAP, 'SHRINK', 'shrin
  * @returns {Array<Object>} the override styles to map
  */
 export const getSizeToOverrideStyles = (props) => {
-  const basis = getBasisStyle(props) || props.sizeTo === 'content' ? 'auto' : props.sizeTo;
+  const basis = props.sizeTo === 'content' ? 'auto' : props.sizeTo;
   const overrideProps = {
     basis,
     grow: 0,
@@ -314,6 +306,37 @@ export const getStartingStyles = ({align, inline}, defaultStyle, isContainer) =>
 };
 
 /**
+ * @function getWrapStyle
+ *
+ * @description
+ * get the flex-wrap styles passed
+ *
+ * @param {boolean} nowrapshould the flex-wrap value be nowrap
+ * @param {boolean|string} wrap the flex-wrap value
+ * @param {boolean} wrapReverse should the flex-wrap be wrap-reverse
+ * @returns {Object} the merged style object
+ */
+export const getWrapStyle = ({nowrap, wrap, wrapReverse}) => {
+  if (WRAP_MAP.hasOwnProperty(wrap)) {
+    return WRAP_MAP[wrap];
+  }
+
+  if (wrap) {
+    return wrap === true ? WRAP_MAP.wrap : {
+      flexWrap: wrap
+    };
+  }
+
+  if (nowrap) {
+    return WRAP_MAP.nowrap;
+  }
+
+  if (wrapReverse) {
+    return WRAP_MAP.wrapReverse;
+  }
+};
+
+/**
  * @function createGetCompleteStyles
  *
  * @description
@@ -336,10 +359,10 @@ export const createGetCompleteStyles = (defaultStyle, transforms, isContainer) =
       ];
     }, getStartingStyles(props, defaultStyle, isContainer));
 
-    return !props.sizeTo ? styles : [
+    return css(!props.sizeTo ? styles : [
       ...styles,
       ...getSizeToOverrideStyles(props)
-    ];
+    ]);
   };
 };
 
@@ -352,7 +375,7 @@ export const createGetCompleteStyles = (defaultStyle, transforms, isContainer) =
  * @param {Object} props the props passed to the component
  * @returns {Object} the merged style object
  */
-export const getCompleteContainerStyles = createGetCompleteStyles(DEFAULT_CONTAINER, [
+export const getContainerStyles = createGetCompleteStyles(DEFAULT_CONTAINER, [
   getAlignContentStyle,
   getAlignItemsStyle,
   getDirectionStyle,
@@ -369,18 +392,10 @@ export const getCompleteContainerStyles = createGetCompleteStyles(DEFAULT_CONTAI
  * @param {Object} props the props passed to the component
  * @returns {Object} the merged style object
  */
-export const getCompleteItemStyles = createGetCompleteStyles(DEFAULT_ITEM, [
+export const getItemStyles = createGetCompleteStyles(DEFAULT_ITEM, [
   getAlignSelfStyle,
   getBasisStyle,
   getGrowStyle,
   getOrderStyle,
   getShrinkStyle
 ], false);
-
-export const getContainerStyles = (props) => {
-  return css(...getCompleteContainerStyles(props));
-};
-
-export const getItemStyles = (props) => {
-  return css(...getCompleteItemStyles(props));
-};

@@ -1,20 +1,56 @@
 {
   "env": {
+    "development": {
+      "presets": [
+        [
+          "env",
+          {
+            "loose": true
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
+    },
+    "es": {
+      "presets": [
+        [
+          "env",
+          {
+            "loose": true,
+            "modules": false
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
+    },
     "production": {
+      "presets": [
+        [
+          "env",
+          {
+            "loose": true
+          }
+        ],
+        "react",
+        "stage-2"
+      ],
       "plugins": [
         "transform-react-remove-prop-types"
       ]
+    },
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "loose": true
+          }
+        ],
+        "react",
+        "stage-2"
+      ]
     }
-  },
-  "presets": [
-    [
-      "env",
-      {
-        "loose": true,
-        "modules": false
-      }
-    ],
-    "react",
-    "stage-2"
-  ]
+  }
 }

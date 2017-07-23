@@ -9,7 +9,7 @@ module.exports = Object.assign({}, defaultConfig, {
   devtool: undefined,
 
   output: Object.assign({}, defaultConfig.output, {
-    filename: 'Flexor.min.js'
+    filename: 'flexor.min.js'
   }),
 
   plugins: defaultConfig.plugins.concat([

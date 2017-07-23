@@ -50,13 +50,25 @@ module.exports = {
       {
         include: [path.join(ROOT, 'src')],
         loader: 'babel-loader',
+        options: {
+          babelrc: false,
+          cacheDirectory: true,
+          presets: [
+            ['env', {
+              loose: true,
+              modules: false
+            }],
+            'react',
+            'stage-2'
+          ]
+        },
         test: /\.js$/
       }
     ]
   },
 
   output: {
-    filename: 'Flexor.js',
+    filename: 'flexor.js',
     library: 'Flexor',
     libraryTarget: 'umd',
     path: path.join(ROOT, 'dist'),
