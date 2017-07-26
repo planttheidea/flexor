@@ -54,10 +54,13 @@ module.exports = {
           babelrc: false,
           cacheDirectory: true,
           presets: [
-            ['env', {
-              loose: true,
-              modules: false
-            }],
+            [
+              'env',
+              {
+                loose: true,
+                modules: false
+              }
+            ],
             'react',
             'stage-2'
           ]

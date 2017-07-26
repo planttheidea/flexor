@@ -1,8 +1,5 @@
 // utils
-import {
-  getMappedSizeStyles,
-  getMappedStyles
-} from '../utils/helpers';
+import {getMappedSizeStyles, getMappedStyles} from '../utils/helpers';
 
 /**
  * @constant {Array<number>} VALID_ORDER_SIZES

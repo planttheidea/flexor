@@ -1,7 +1,5 @@
 // utils
-import {
-  getMappedStyles
-} from '../utils/helpers';
+import {getMappedStyles} from '../utils/helpers';
 
 // display
 

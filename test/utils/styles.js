@@ -551,9 +551,7 @@ test('if getStartingStyles returns only the defaultStyle if isContainer is false
 
   const result = styles.getStartingStyles(props, defaultStyle, isContainer);
 
-  t.deepEqual(result, [
-    defaultStyle
-  ]);
+  t.deepEqual(result, [defaultStyle]);
 });
 
 test('if getStartingStyles returns only the defaultStyle if inline is false', (t) => {
@@ -568,9 +566,7 @@ test('if getStartingStyles returns only the defaultStyle if inline is false', (t
 
   const result = styles.getStartingStyles(props, defaultStyle, isContainer);
 
-  t.deepEqual(result, [
-    defaultStyle
-  ]);
+  t.deepEqual(result, [defaultStyle]);
 });
 
 test('if getStartingStyles returns the merged defaultStyle with inline and INLINE_ALIGN_MAP style if isContainer and inline are true', (t) => {
@@ -601,9 +597,7 @@ test('if createGetCompleteStyles sends the correct styles array to css when size
   const fakeTransformReturn = {
     bar: 'baz'
   };
-  const transforms = [
-    sinon.stub().returns(fakeTransformReturn)
-  ];
+  const transforms = [sinon.stub().returns(fakeTransformReturn)];
   const isContainer = true;
 
   const getCompleteStyles = styles.createGetCompleteStyles(defaultStyle, transforms, isContainer);
@@ -625,10 +619,7 @@ test('if createGetCompleteStyles sends the correct styles array to css when size
 
   t.is(args.length, 1);
 
-  t.deepEqual(args[0], [
-    defaultStyle,
-    fakeTransformReturn
-  ]);
+  t.deepEqual(args[0], [defaultStyle, fakeTransformReturn]);
 
   cssStub.restore();
 });
@@ -640,9 +631,7 @@ test('if createGetCompleteStyles sends the correct styles array to css when size
   const fakeTransformReturn = {
     bar: 'baz'
   };
-  const transforms = [
-    sinon.stub().returns(fakeTransformReturn)
-  ];
+  const transforms = [sinon.stub().returns(fakeTransformReturn)];
   const isContainer = true;
 
   const getCompleteStyles = styles.createGetCompleteStyles(defaultStyle, transforms, isContainer);
@@ -666,11 +655,7 @@ test('if createGetCompleteStyles sends the correct styles array to css when size
 
   t.is(args.length, 1);
 
-  t.deepEqual(args[0], [
-    defaultStyle,
-    fakeTransformReturn,
-    ...styles.getSizeToOverrideStyles(props)
-  ]);
+  t.deepEqual(args[0], [defaultStyle, fakeTransformReturn, ...styles.getSizeToOverrideStyles(props)]);
 
   cssStub.restore();
 });
@@ -687,9 +672,7 @@ test('if getContainerStyles correctly uses createGetCompleteStyles for container
   const args = cssStub.args[0];
 
   t.is(args.length, 1);
-  t.deepEqual(args[0], [
-    containerStyleConstants.DEFAULT_CONTAINER
-  ]);
+  t.deepEqual(args[0], [containerStyleConstants.DEFAULT_CONTAINER]);
 
   cssStub.restore();
 
@@ -717,9 +700,7 @@ test('if getItemStyles correctly uses createGetCompleteStyles for items', (t) =>
   const args = cssStub.args[0];
 
   t.is(args.length, 1);
-  t.deepEqual(args[0], [
-    itemStyleConstants.DEFAULT_ITEM
-  ]);
+  t.deepEqual(args[0], [itemStyleConstants.DEFAULT_ITEM]);
 
   cssStub.restore();
 

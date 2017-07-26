@@ -13,18 +13,10 @@ import {
   JUSTIFY_CONTENT_MAP,
   WRAP_MAP
 } from '../styles/container';
-import {
-  ALIGN_SELF_MAP,
-  DEFAULT_ITEM,
-  GROW_MAP,
-  ORDER_MAP,
-  SHRINK_MAP
-} from '../styles/item';
+import {ALIGN_SELF_MAP, DEFAULT_ITEM, GROW_MAP, ORDER_MAP, SHRINK_MAP} from '../styles/item';
 
 // utils
-import {
-  getMappedSizePrefixedProperty
-} from './helpers';
+import {getMappedSizePrefixedProperty} from './helpers';
 
 /**
  * @function createGetDynamicStyle
@@ -90,10 +82,12 @@ export const getAlignContentStyle = ({alignContent}) => {
  */
 export const getAlignItemsStyle = ({alignItems, column}) => {
   if (ALIGN_ITEMS_MAP.hasOwnProperty(alignItems)) {
-    return !column ? ALIGN_ITEMS_MAP[alignItems] : {
-      ...ALIGN_ITEMS_MAP[alignItems],
-      ...ALIGN_ITEMS_COLUMN_FIX
-    };
+    return !column
+      ? ALIGN_ITEMS_MAP[alignItems]
+      : {
+        ...ALIGN_ITEMS_MAP[alignItems],
+        ...ALIGN_ITEMS_COLUMN_FIX
+      };
   }
 
   if (alignItems) {
@@ -101,10 +95,12 @@ export const getAlignItemsStyle = ({alignItems, column}) => {
       alignItems
     };
 
-    return !column ? style : {
-      ...style,
-      ...ALIGN_ITEMS_COLUMN_FIX
-    };
+    return !column
+      ? style
+      : {
+        ...style,
+        ...ALIGN_ITEMS_COLUMN_FIX
+      };
   }
 };
 
@@ -144,19 +140,19 @@ export const getBasisStyle = (props) => {
     return;
   }
 
-  const {
-    basis
-  } = props;
+  const {basis} = props;
 
   const basisObject = {
     flexBasis: basis
   };
 
-  return basis !== 0 && basis !== '0' ? basisObject : {
-    ...basisObject,
-    minHeight: 1,
-    minWidth: 1
-  };
+  return basis !== 0 && basis !== '0'
+    ? basisObject
+    : {
+      ...basisObject,
+      minHeight: 1,
+      minWidth: 1
+    };
 };
 
 /**
@@ -271,11 +267,7 @@ export const getSizeToOverrideStyles = (props) => {
     shrink: 0
   };
 
-  return [
-    getBasisStyle(overrideProps),
-    getGrowStyle(overrideProps),
-    getShrinkStyle(overrideProps)
-  ];
+  return [getBasisStyle(overrideProps), getGrowStyle(overrideProps), getShrinkStyle(overrideProps)];
 };
 
 /**
@@ -322,9 +314,11 @@ export const getWrapStyle = ({nowrap, wrap, wrapReverse}) => {
   }
 
   if (wrap) {
-    return wrap === true ? WRAP_MAP.wrap : {
-      flexWrap: wrap
-    };
+    return wrap === true
+      ? WRAP_MAP.wrap
+      : {
+        flexWrap: wrap
+      };
   }
 
   if (nowrap) {
@@ -360,10 +354,7 @@ export const createGetCompleteStyles = (defaultStyle, transforms, isContainer) =
       return styles;
     }, getStartingStyles(props, defaultStyle, isContainer));
 
-    return css(!props.sizeTo ? styles : [
-      ...styles,
-      ...getSizeToOverrideStyles(props)
-    ]);
+    return css(!props.sizeTo ? styles : [...styles, ...getSizeToOverrideStyles(props)]);
   };
 };
 
@@ -376,13 +367,11 @@ export const createGetCompleteStyles = (defaultStyle, transforms, isContainer) =
  * @param {Object} props the props passed to the component
  * @returns {Object} the merged style object
  */
-export const getContainerStyles = createGetCompleteStyles(DEFAULT_CONTAINER, [
-  getAlignContentStyle,
-  getAlignItemsStyle,
-  getDirectionStyle,
-  getJustifyContentStyle,
-  getWrapStyle
-], true);
+export const getContainerStyles = createGetCompleteStyles(
+  DEFAULT_CONTAINER,
+  [getAlignContentStyle, getAlignItemsStyle, getDirectionStyle, getJustifyContentStyle, getWrapStyle],
+  true
+);
 
 /**
  * @function getItemStyles
@@ -393,10 +382,8 @@ export const getContainerStyles = createGetCompleteStyles(DEFAULT_CONTAINER, [
  * @param {Object} props the props passed to the component
  * @returns {Object} the merged style object
  */
-export const getItemStyles = createGetCompleteStyles(DEFAULT_ITEM, [
-  getAlignSelfStyle,
-  getBasisStyle,
-  getGrowStyle,
-  getOrderStyle,
-  getShrinkStyle
-], false);
+export const getItemStyles = createGetCompleteStyles(
+  DEFAULT_ITEM,
+  [getAlignSelfStyle, getBasisStyle, getGrowStyle, getOrderStyle, getShrinkStyle],
+  false
+);

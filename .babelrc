@@ -36,9 +36,7 @@
         "react",
         "stage-2"
       ],
-      "plugins": [
-        "transform-react-remove-prop-types"
-      ]
+      "plugins": ["transform-react-remove-prop-types"]
     },
     "test": {
       "presets": [

@@ -17,18 +17,21 @@ export const PROPS_TO_SKIP = {
  * @returns {{internal: Object, remaining: Object}} the split prop types
  */
 export const getSplitProps = (props, internalPropTypes) => {
-  return Object.keys(props).reduce((splitProps, prop) => {
-    if (PROPS_TO_SKIP[prop]) {
+  return Object.keys(props).reduce(
+    (splitProps, prop) => {
+      if (PROPS_TO_SKIP[prop]) {
+        return splitProps;
+      }
+
+      const subObject = internalPropTypes[prop] ? splitProps.internal : splitProps.remaining;
+
+      subObject[prop] = props[prop];
+
       return splitProps;
+    },
+    {
+      internal: {},
+      remaining: {}
     }
-
-    const subObject = internalPropTypes[prop] ? splitProps.internal : splitProps.remaining;
-
-    subObject[prop] = props[prop];
-
-    return splitProps;
-  }, {
-    internal: {},
-    remaining: {}
-  });
+  );
 };

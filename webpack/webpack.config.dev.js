@@ -40,10 +40,7 @@ module.exports = Object.assign({}, defaultConfig, {
       }
 
       return Object.assign({}, rule, {
-        include: rule.include.concat([
-          path.join(ROOT, 'DEV_ONLY'),
-          path.join(ROOT, 'examples')
-        ])
+        include: rule.include.concat([path.join(ROOT, 'DEV_ONLY'), path.join(ROOT, 'examples')])
       });
     })
   }),
