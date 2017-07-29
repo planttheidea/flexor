@@ -57,7 +57,7 @@
     "webpack-dev-server": "^2.5.1"
   },
   "homepage": "https://github.com/planttheidea/flexor#readme",
-  "keywords": ["flexbox", "react"],
+  "keywords": ["flexbox", "react", "flex"],
   "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
