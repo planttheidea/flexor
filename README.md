@@ -57,6 +57,8 @@ class App extends PureComponent {
 }
 ```
 
+There are a number of common usage examples provided in [the examples in the `dev` app](examples).
+
 ## Components
 
 ### FlexContainer
@@ -273,7 +275,7 @@ Besides all valid values for `basis`, the additional value of `content` can be u
 * Chrome (all versions)
 * Firefox (all versions)
 * Edge (all versions)
-* Opera 15+
+* Opera 16+
 * IE 11+
 * Safari 8+
 * iOS 8+
@@ -290,7 +292,7 @@ If using the built version provided in `dist`, you will need to include addition
 Standard stuff, clone the repo and `npm install` dependencies. The npm scripts available:
 * `build` => run webpack to build development `dist` file with NODE_ENV=development
 * `build:minifed` => run webpack to build production `dist` file with NODE_ENV=production
-* `dev` => run webpack dev server to run example app (playground!)
+* `dev` => run webpack dev server to run example app (playground with examples)
 * `dist` => runs `build` and `build-minified`
 * `docs` => builds the docs via `jsdoc`
 * `lint` => run ESLint against all files in the `src` folder
