@@ -18,7 +18,7 @@
     "inline-style-prefixer": "^3.0.6",
     "moize": "^3.3.0"
   },
-  "description": "Handle flexbox in a natural React way",
+  "description": "Flexbox, done the React way.",
   "devDependencies": {
     "ava": "^0.21.0",
     "babel-cli": "^6.24.1",
