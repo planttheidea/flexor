@@ -9,12 +9,13 @@
     "source": ["src/**/*.js"],
     "verbose": true
   },
-  "browserslist": ["defaults", "Explorer >= 10", "Safari >= 8", "Opera >= 15", "iOS >= 8", "Android >= 4"],
+  "browserslist": ["defaults", "Explorer >= 11", "Safari >= 8", "Opera >= 16", "iOS >= 8", "Android >= 4"],
   "bugs": {
     "url": "https://github.com/planttheidea/flexor/issues"
   },
   "dependencies": {
-    "glamor": "^2.20.37",
+    "fbjs": "^0.8.14",
+    "inline-style-prefixer": "^3.0.6",
     "moize": "^3.3.0"
   },
   "description": "Handle flexbox in a natural React way",

@@ -12,12 +12,6 @@ module.exports = {
   entry: [path.join(ROOT, 'src', 'index.js')],
 
   externals: {
-    glamor: {
-      amd: 'glamor',
-      commonjs: 'glamor',
-      commonjs2: 'glamor',
-      root: 'glamor'
-    },
     moize: {
       amd: 'moize',
       commonjs: 'moize',
@@ -72,7 +66,7 @@ module.exports = {
 
   output: {
     filename: 'flexor.js',
-    library: 'Flexor',
+    library: 'flexor',
     libraryTarget: 'umd',
     path: path.join(ROOT, 'dist'),
     umdNamedDefine: true

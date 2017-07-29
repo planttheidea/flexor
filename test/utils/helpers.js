@@ -4,6 +4,19 @@ import test from 'ava';
 // src
 import * as helpers from 'src/utils/helpers';
 
+test('if fastReduce will produce the same results as the native Array.prototype.reduce()', (t) => {
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const sum = (previous, current) => {
+    return previous + current;
+  };
+  const initialValue = 0;
+
+  const result = helpers.fastReduce(array, sum, initialValue);
+  const nativeResult = array.reduce(sum, initialValue);
+
+  t.is(result, nativeResult);
+});
+
 test('if getMappedSizePrefixedProperty returns the correct prefixed property if the size is positive', (t) => {
   const prefix = 'FOO';
   const size = 1;
@@ -83,4 +96,22 @@ test('if getMappedStyles creates the right object for the key', (t) => {
       quz: 'BAZ'
     }
   });
+});
+
+test('if merge will shallowly merge source into target', (t) => {
+  const target = {
+    foo: 'bar'
+  };
+  const source = {
+    bar: 'baz'
+  };
+
+  const result = helpers.merge(target, source);
+
+  t.deepEqual(result, {
+    ...target,
+    ...source
+  });
+
+  t.is(result, target);
 });

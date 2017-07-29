@@ -26,18 +26,3 @@ test('if getSplitProps will split the props into internal and remaining based on
     }
   });
 });
-
-test('if getSplitProps will ignore props that are defined in PROPS_TO_SKIP', (t) => {
-  const propsPassed = {
-    children: 'children',
-    element: 'element'
-  };
-  const internalProps = {};
-
-  const result = props.getSplitProps(propsPassed, internalProps);
-
-  t.deepEqual(result, {
-    internal: {},
-    remaining: {}
-  });
-});

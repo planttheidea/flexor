@@ -38,7 +38,7 @@ style.textContent = `
       text-align: center;
       text-decoration: none;
       padding: 15px;
-      white-space: none;
+      white-space: nowrap;
     }
 
     .navigation a:hover {
@@ -107,5 +107,5 @@ const renderApp = (container, length = 1000) => {
 
 renderApp(div);
 
-document.body.appendChild(style);
+document.head.appendChild(style);
 document.body.appendChild(div);

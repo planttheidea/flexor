@@ -1,10 +1,5 @@
-/**
- * @constant {Object} PROPS_TO_SKIP
- */
-export const PROPS_TO_SKIP = {
-  children: true,
-  element: true
-};
+// utils
+import {fastReduce} from './helpers';
 
 /**
  * @function getSplitProps
@@ -17,12 +12,9 @@ export const PROPS_TO_SKIP = {
  * @returns {{internal: Object, remaining: Object}} the split prop types
  */
 export const getSplitProps = (props, internalPropTypes) => {
-  return Object.keys(props).reduce(
+  return fastReduce(
+    Object.keys(props),
     (splitProps, prop) => {
-      if (PROPS_TO_SKIP[prop]) {
-        return splitProps;
-      }
-
       const subObject = internalPropTypes[prop] ? splitProps.internal : splitProps.remaining;
 
       subObject[prop] = props[prop];

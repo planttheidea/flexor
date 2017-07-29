@@ -1,12 +1,12 @@
 // test
 import test from 'ava';
-import * as glamor from 'glamor';
 import sinon from 'sinon';
 
 // src
 import * as styles from 'src/utils/styles';
-import * as helpers from 'src/utils/helpers';
 import * as containerStyleConstants from 'src/styles/container';
+import * as css from 'src/utils/css';
+import * as helpers from 'src/utils/helpers';
 import * as itemStyleConstants from 'src/styles/item';
 
 test('if createGetDynamicStyle will create a method that gets the property that exists on the map when positive', (t) => {
@@ -606,7 +606,7 @@ test('if createGetCompleteStyles sends the correct styles array to css when size
 
   const props = {};
 
-  const cssStub = sinon.stub(glamor, 'css');
+  const cssStub = sinon.stub(css, 'createCssRule');
 
   getCompleteStyles(props);
 
@@ -642,7 +642,7 @@ test('if createGetCompleteStyles sends the correct styles array to css when size
     sizeTo: 'content'
   };
 
-  const cssStub = sinon.stub(glamor, 'css');
+  const cssStub = sinon.stub(css, 'createCssRule');
 
   getCompleteStyles(props);
 
@@ -663,7 +663,7 @@ test('if createGetCompleteStyles sends the correct styles array to css when size
 test('if getContainerStyles correctly uses createGetCompleteStyles for containers', (t) => {
   const props = {};
 
-  const cssStub = sinon.spy(glamor, 'css');
+  const cssStub = sinon.spy(css, 'createCssRule');
 
   const result = styles.getContainerStyles(props);
 
@@ -684,14 +684,14 @@ test('if getContainerStyles correctly uses createGetCompleteStyles for container
   t.is(keys.length, 1);
 
   keys.forEach((key) => {
-    t.true(/data-css-(.*)/.test(key));
+    t.true(/data-flexor-([0-9])/.test(key));
   });
 });
 
 test('if getItemStyles correctly uses createGetCompleteStyles for items', (t) => {
   const props = {};
 
-  const cssStub = sinon.spy(glamor, 'css');
+  const cssStub = sinon.spy(css, 'createCssRule');
 
   const result = styles.getItemStyles(props);
 
@@ -712,6 +712,6 @@ test('if getItemStyles correctly uses createGetCompleteStyles for items', (t) =>
   t.is(keys.length, 1);
 
   keys.forEach((key) => {
-    t.true(/data-css-(.*)/.test(key));
+    t.true(/data-flexor-([0-9])/.test(key));
   });
 });

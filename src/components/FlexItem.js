@@ -1,5 +1,4 @@
 // external dependencies
-import moize from 'moize';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 
@@ -10,13 +9,13 @@ import {getItemStyles} from '../utils/styles';
 const INTERNAL_PROPS = {
   alignSelf: true,
   basis: true,
+  children: true,
+  element: true,
   grow: true,
   order: true,
   shrink: true,
   sizeTo: true
 };
-
-const getCachedItemStyles = moize.react(getItemStyles);
 
 class FlexItem extends PureComponent {
   static displayName = 'FlexItem';
@@ -37,13 +36,13 @@ class FlexItem extends PureComponent {
   };
 
   render() {
-    const {children, element: Element} = this.props;
-
     const splitProps = getSplitProps(this.props, INTERNAL_PROPS);
+
+    const {children, element: Element, ...internal} = splitProps.internal;
 
     return (
       <Element
-        {...getCachedItemStyles(splitProps.internal)}
+        {...getItemStyles(internal)}
         {...splitProps.remaining}
       >
         {children}

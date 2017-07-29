@@ -283,7 +283,6 @@ Besides all valid values for `basis`, the additional value of `content` can be u
 
 If using the built version provided in `dist`, you will need to include additional libraries as dependencies prior to the inclusion of `flexor`:
 * [React](https://www.npmjs.com/package/react)
-* [glamor](https://www.npmjs.com/package/glamor)
 * [moize](https://www.npmjs.com/package/moize)
 
 ## Development

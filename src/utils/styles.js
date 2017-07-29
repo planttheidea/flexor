@@ -1,5 +1,5 @@
 // external dependencies
-import {css} from 'glamor';
+import {createCssRule} from './css';
 
 // styles
 import {
@@ -16,7 +16,7 @@ import {
 import {ALIGN_SELF_MAP, DEFAULT_ITEM, GROW_MAP, ORDER_MAP, SHRINK_MAP} from '../styles/item';
 
 // utils
-import {getMappedSizePrefixedProperty} from './helpers';
+import {fastReduce, getMappedSizePrefixedProperty} from './helpers';
 
 /**
  * @function createGetDynamicStyle
@@ -26,7 +26,7 @@ import {getMappedSizePrefixedProperty} from './helpers';
  *
  * @param {Object} map the map of styles
  * @param {string} prefix the prefix of the key to retrieve
- * @param {prop} prop the prop retrieved from props
+ * @param {string} prop the prop retrieved from props
  * @param {string} [defaultProp] the default prop to use if standard prop is not found
  * @returns {function(Object): Object} the method to retrieve the style object
  */
@@ -109,7 +109,7 @@ export const getAlignItemsStyle = ({alignItems, column}) => {
  *
  * @description
  * get the align-self styles passed
- *]
+ * 
  * @param {string} alignSelf the align-self value
  * @returns {Object} the merged style object
  */
@@ -344,17 +344,21 @@ export const getWrapStyle = ({nowrap, wrap, wrapReverse}) => {
  */
 export const createGetCompleteStyles = (defaultStyle, transforms, isContainer) => {
   return (props) => {
-    const styles = transforms.reduce((styles, transform) => {
-      const style = transform(props);
+    const styles = fastReduce(
+      transforms,
+      (styles, transform) => {
+        const style = transform(props);
 
-      if (style) {
-        styles.push(style);
-      }
+        if (style) {
+          styles.push(style);
+        }
 
-      return styles;
-    }, getStartingStyles(props, defaultStyle, isContainer));
+        return styles;
+      },
+      getStartingStyles(props, defaultStyle, isContainer)
+    );
 
-    return css(!props.sizeTo ? styles : [...styles, ...getSizeToOverrideStyles(props)]);
+    return createCssRule(!props.sizeTo ? styles : [...styles, ...getSizeToOverrideStyles(props)]);
   };
 };
 

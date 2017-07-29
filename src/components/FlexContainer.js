@@ -1,5 +1,4 @@
 // external dependencies
-import moize from 'moize';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 
@@ -10,9 +9,11 @@ import {getContainerStyles} from '../utils/styles';
 const INTERNAL_PROPS = {
   alignContent: true,
   alignItems: true,
+  children: true,
   column: true,
   columnReverse: true,
   direction: true,
+  element: true,
   justifyContent: true,
   inline: true,
   inlineAlign: true,
@@ -20,8 +21,6 @@ const INTERNAL_PROPS = {
   rowReverse: true,
   wrap: true
 };
-
-const getCachedContainerStyles = moize.react(getContainerStyles);
 
 class FlexContainer extends PureComponent {
   static displayName = 'FlexContainer';
@@ -47,13 +46,13 @@ class FlexContainer extends PureComponent {
   };
 
   render() {
-    const {children, element: Element} = this.props;
-
     const splitProps = getSplitProps(this.props, INTERNAL_PROPS);
+
+    const {children, element: Element, ...internal} = splitProps.internal;
 
     return (
       <Element
-        {...getCachedContainerStyles(splitProps.internal)}
+        {...getContainerStyles(internal)}
         {...splitProps.remaining}
       >
         {children}
