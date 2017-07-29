@@ -12,21 +12,16 @@ export const VALID_ORDER_SIZES = [-9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3
 export const VALID_GROW_SHRINK_SIZES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 /**
- * @constant {Object} ALIGN_SELF_VALUES
+ * @constant {Object} ALIGN_SELF_MAP
  */
-export const ALIGN_SELF_VALUES = {
+export const ALIGN_SELF_MAP = getMappedStyles('alignSelf', {
   auto: 'auto',
   baseline: 'baseline',
   center: 'center',
   end: 'flex-end',
   start: 'flex-start',
   stretch: 'stretch'
-};
-
-/**
- * @constant {Object} ALIGN_SELF_MAP
- */
-export const ALIGN_SELF_MAP = getMappedStyles(ALIGN_SELF_VALUES, 'alignSelf');
+});
 
 // grow values
 

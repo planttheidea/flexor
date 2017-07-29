@@ -1,14 +1,6 @@
-import {
-  speedy // eslint-disable-line
-} from 'glamor';
-import React, {
-  PureComponent
-} from 'react';
+import React, {PureComponent} from 'react';
 
-import {
-  FlexContainer,
-  FlexItem
-} from '../src';
+import {FlexContainer, FlexItem} from '../src';
 
 // examples
 import ContainerWithAlignContentSet from '../examples/ContainerWithAlignContentSet';
@@ -17,8 +9,6 @@ import ItemsThatAreContainers from '../examples/ItemsThatAreContainers';
 import OrderedItems from '../examples/OrderedItems';
 import SizedGrowingItems from '../examples/SizedGrowingItems';
 import Standard from '../examples/Standard';
-
-// speedy(true); // uncomment this to activate production speed (way faster)
 
 const EXAMPLES = [
   {Component: Standard, name: 'Standard', id: 'standard'},
@@ -71,12 +61,10 @@ class App extends PureComponent {
           grow
         >
           {EXAMPLES.map(({Component, id}) => {
-            return (
-              <Component
-                id={id}
-                key={`component-${id}`}
-              />
-            );
+            return (<Component
+              id={id}
+              key={`component-${id}`}
+            />);
           })}
         </FlexItem>
       </FlexContainer>

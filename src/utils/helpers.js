@@ -66,11 +66,11 @@ export const getMappedSizeStyles = (sizes, prefix, property) => {
  * @description
  * get the mapped styles based on the values passed
  *
- * @param {Object} object the object of key => value pairs to assign to the property
  * @param {string} property the CSS property to assign th values to
+ * @param {Object} object the object of key => value pairs to assign to the property
  * @returns {Object} the mapped styles
  */
-export const getMappedStyles = (object, property) => {
+export const getMappedStyles = (property, object) => {
   return fastReduce(
     Object.keys(object),
     (map, key) => {

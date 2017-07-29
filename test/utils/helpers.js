@@ -83,7 +83,7 @@ test('if getMappedStyles creates the right object for the key', (t) => {
   };
   const property = 'quz';
 
-  const result = helpers.getMappedStyles(object, property);
+  const result = helpers.getMappedStyles(property, object);
 
   t.deepEqual(result, {
     foo: {
