@@ -6,6 +6,31 @@
 
 Flexbox, done the React way.
 
+## Usage
+
+```javascript
+import {
+  FlexContainer,
+  FlexItem
+} from 'flexor';
+
+class App extends PureComponent {
+  render() {
+    return (
+      <FlexContainer>
+        <FlexItem sizeTo="content">
+          I will be sized to my content, and no larger
+        </FlexItem>
+
+        <FlexItem>
+          I will grow to fit the rest of the container
+        </FlexItem>
+      </FlexContainer>
+    );
+  }
+}
+```
+
 ## Table of contents
 * [Usage](#usage)
 * [Components](#components)
@@ -31,31 +56,6 @@ Flexbox, done the React way.
 * [Browser support](#browser-support)
 * [External dependencies](#external-dependencies)
 * [Development](#development)
-
-## Usage
-
-```javascript
-import {
-  FlexContainer,
-  FlexItem
-} from 'flexor';
-
-class App extends PureComponent {
-  render() {
-    return (
-      <FlexContainer>
-        <FlexItem sizeTo="content">
-          I will be sized to my content, and no larger
-        </FlexItem>
-
-        <FlexItem>
-          I will grow to fit the rest of the container
-        </FlexItem>
-      </FlexContainer>
-    );
-  }
-}
-```
 
 There are a number of common usage examples provided in [the examples in the `dev` app](examples).
 
