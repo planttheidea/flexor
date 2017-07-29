@@ -36,8 +36,7 @@ export const createGetDynamicStyle = (map, prefix, prop, defaultProp) => {
       return;
     }
 
-    const value = props[prop];
-    const prefixedProperty = getMappedSizePrefixedProperty(prefix, value);
+    const prefixedProperty = getMappedSizePrefixedProperty(prefix, props[prop]);
 
     if (map.hasOwnProperty(prefixedProperty)) {
       return map[prefixedProperty];
@@ -109,7 +108,7 @@ export const getAlignItemsStyle = ({alignItems, column}) => {
  *
  * @description
  * get the align-self styles passed
- * 
+ *
  * @param {string} alignSelf the align-self value
  * @returns {Object} the merged style object
  */
@@ -260,9 +259,8 @@ export const getShrinkStyle = createGetDynamicStyle(SHRINK_MAP, 'SHRINK', 'shrin
  * @returns {Array<Object>} the override styles to map
  */
 export const getSizeToOverrideStyles = (props) => {
-  const basis = props.sizeTo === 'content' ? 'auto' : props.sizeTo;
   const overrideProps = {
-    basis,
+    basis: props.sizeTo === 'content' ? 'auto' : props.sizeTo,
     grow: 0,
     shrink: 0
   };
@@ -284,17 +282,15 @@ export const getSizeToOverrideStyles = (props) => {
  * @returns {Array<Object>} the starting styles of the component
  */
 export const getStartingStyles = ({inline, inlineAlign}, defaultStyle, isContainer) => {
-  if (!isContainer || !inline) {
-    return [defaultStyle];
-  }
-
-  return [
-    {
-      ...defaultStyle,
-      ...DISPLAY_MAP.inline,
-      ...INLINE_ALIGN_MAP[inlineAlign]
-    }
-  ];
+  return !isContainer || !inline
+    ? [defaultStyle]
+    : [
+      {
+        ...defaultStyle,
+        ...DISPLAY_MAP.inline,
+        ...INLINE_ALIGN_MAP[inlineAlign]
+      }
+    ];
 };
 
 /**

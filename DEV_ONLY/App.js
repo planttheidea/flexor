@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react';
+import {findDOMNode} from 'react-dom';
 
 import {FlexContainer, FlexItem} from '../src';
 
@@ -20,6 +21,26 @@ const EXAMPLES = [
 ];
 
 class App extends PureComponent {
+  componentDidMount() {
+    requestAnimationFrame(() => {
+      this.scrollToHash();
+    });
+  }
+
+  scrollContainer = null;
+
+  scrollToHash() {
+    const item = findDOMNode(this).querySelector(`[href="${window.location.hash}"]`);
+
+    if (item) {
+      item.click();
+    }
+  }
+
+  setScrollContainerRef = (element) => {
+    this.scrollContainer = findDOMNode(element);
+  };
+
   render() {
     return (
       <FlexContainer
@@ -59,6 +80,7 @@ class App extends PureComponent {
           basis="0"
           className="contents"
           grow
+          ref={this.setScrollContainerRef}
         >
           {EXAMPLES.map(({Component, id}) => {
             return (<Component

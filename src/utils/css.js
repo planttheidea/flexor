@@ -12,6 +12,14 @@ import {fastReduce, merge} from './helpers';
 const getPrefixedStyleName = moize(hyphenateStyleName);
 const prefixStyle = moize.serialize(prefixAll);
 
+/**
+ * @constant {RegExp} FLEX_BASIS_REGEXP
+ */
+export const FLEX_BASIS_REGEXP = /flex-basis/;
+
+/**
+ * @constant {RuleCache} ruleCache
+ */
 export const ruleCache = new RuleCache();
 
 /**
@@ -25,7 +33,7 @@ export const ruleCache = new RuleCache();
  * @returns {number|string} the value with px applied as suffix if flex-basis
  */
 export const getCleanCssValue = (key, value) => {
-  return /flex-basis/.test(key) && +value > 0 ? `${value}px` : value;
+  return FLEX_BASIS_REGEXP.test(key) && +value > 0 ? `${value}px` : value;
 };
 
 /**
@@ -131,12 +139,12 @@ export const getStyleAsCssString = moize((style) => {
  * @returns {Object} the selector object to apply to the flex elements
  */
 export const createCssRule = (styles) => {
-  const cssString = getStyleAsCssString(prefixStyle(getMergedStyle(styles)));
-  const uniqueKey = `data-flexor-${getHash(cssString)}`;
-
   if (!ruleCache.tag && typeof window !== 'undefined') {
     ruleCache.assignTag();
   }
+
+  const cssString = getStyleAsCssString(prefixStyle(getMergedStyle(styles)));
+  const uniqueKey = `data-flexor-${getHash(cssString)}`;
 
   if (ruleCache.tag && !ruleCache.has(uniqueKey)) {
     ruleCache.add(uniqueKey, cssString);
