@@ -24,9 +24,7 @@ export default class RuleCache {
    * @param {string} css the css rule
    */
   add(key, css) {
-    const currentIndex = this.index;
-
-    this.tag.sheet.insertRule(`[${key}]{${css}}`, currentIndex);
+    this.tag.sheet.insertRule(`[${key}]{${css}}`, this.index);
 
     this.cache[key] = true;
     this.index++;
