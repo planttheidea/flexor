@@ -1,16 +1,17 @@
 // external dependencies
 import moize from 'moize';
 import hyphenateStyleName from 'fbjs/lib/hyphenateStyleName';
-import prefixAll from 'inline-style-prefixer/static';
 
 // cache
 import RuleCache from './RuleCache';
 
-// utils
+// helpers
 import {fastReduce, merge} from './helpers';
 
+// options
+import {getOptions} from './options';
+
 const getPrefixedStyleName = moize(hyphenateStyleName);
-const prefixStyle = moize.serialize(prefixAll);
 
 /**
  * @constant {RegExp} FLEX_BASIS_REGEXP
@@ -143,7 +144,8 @@ export const createCssRule = (styles) => {
     ruleCache.assignTag();
   }
 
-  const cssString = getStyleAsCssString(prefixStyle(getMergedStyle(styles)));
+  const options = getOptions();
+  const cssString = getStyleAsCssString(options.prefix(getMergedStyle(styles)));
   const uniqueKey = `data-flexor-${getHash(cssString)}`;
 
   if (ruleCache.tag && !ruleCache.has(uniqueKey)) {

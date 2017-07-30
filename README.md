@@ -31,6 +31,8 @@ class App extends PureComponent {
 }
 ```
 
+This library provides a declarative and streamlined approach towards building flexbox-based layouts, building on top of existing knowledge while removing the boilerplate. It targets implementation simplicity without sacrificing the full capabilities of flexbox.
+
 ## Table of contents
 * [Usage](#usage)
 * [Components](#components)
@@ -55,6 +57,7 @@ class App extends PureComponent {
     * [order](#order)
     * [shrink](#shrink)
     * [sizeTo](#sizeto)
+* [Global options](#global-options)
 * [Browser support](#browser-support)
 * [External dependencies](#external-dependencies)
 * [Development](#development)
@@ -65,7 +68,7 @@ There are a number of common usage examples provided in [the examples in the `de
 
 ### FlexContainer
 
-The container of flexbox items.
+The container of flexbox items (all possible options are shown, but none are required).
 
 ```javascript
 <FlexContainer
@@ -195,7 +198,7 @@ If a boolean, applies `wrap` as the value of `flex-wrap`.
 
 ### FlexItem
 
-The items within a flexbox container.
+A child of a flexbox container (all possible options are shown, but none are required).
 
 ```javascript
 <FlexItem
@@ -271,6 +274,40 @@ Besides all valid values for `basis`, the additional value of `content` can be u
 ```javascript
 <FlexItem sizeTo="content">
 ```
+
+## Global options
+
+The following global options are available:
+
+```javascript
+{
+  debug: boolean, // defaults to false
+  prefix: Function // defaults to prefixAll from inline-style-prefixer
+}
+```
+
+To modify any of the options, you can call the `setOptions` method with an object of options to apply. They will be shallowly merged into the existing options object, and used for all implementations of `flexor` components after applied.
+
+```javascript
+setOptions({
+  debug: true,
+  prefix: myCustomPrefixer
+})
+```
+
+#### debug
+
+*boolean, defaults to false*
+
+By default the styles will be added to a style tag using the very fast `insertRule` API for stylesheets. The drawback with this is that it is difficult to diagnose style declarations, and sourcemaps do not work (as there is no explicit source). By setting `debug` to `true`, the styles will instead be appended as `textContent` to the `style` tag, so that the styles applied are traceable and can be altered in devtools.
+
+#### prefix
+
+*Function, defaults to prefixAll*
+
+By default `flexor` uses the static `prefixAll` method provided by `inline-style-prefixer`, which covers a large majority of modern browser use cases. That said, if you need to support specific legacy browsers such as IE10, you will need to provide a custom prefixer. This method will receive a single parameter, the object of styles, and expects an object of prefixed styles to be returned.
+
+**Tip**: If you do not want to prefix styles at all, pass an identity function to this option.
 
 ## Browser support
 
