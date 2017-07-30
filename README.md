@@ -40,6 +40,7 @@ class App extends PureComponent {
     * [column](#column)
     * [columnReverse](#columnreverse)
     * [direction](#direction)
+    * [element](#element)
     * [justifyContent](#justifycontent)
     * [inline](#inline)
     * [inlineAlign](#inlinealign)
@@ -49,6 +50,7 @@ class App extends PureComponent {
   * [FlexItem](#flexitem)
     * [alignSelf](#alignself)
     * [basis](#basis)
+    * [element](#element)
     * [grow](#grow)
     * [order](#order)
     * [shrink](#shrink)
@@ -136,7 +138,7 @@ The `flex-direction` value for the container. Valid values:
 
 *(function|string), defaults to "div"*
 
-The element type to use for the container element. Accepts either string values for standard HTML elements, or function values for React components.
+The element type to use for the container element. Accepts either string values for standard HTML elements, or function values for React components. This is often used for semantic element usage (`header`, `footer`, etc.).
 
 #### justifyContent
 
@@ -232,7 +234,7 @@ Sets the `flex-basis` value for the item. If a number, will translate to that ex
 
 *(function|string), defaults to "div"*
 
-The element type to use for the container element. Accepts either string values for standard HTML elements, or function values for React components.
+The element type to use for the container element. Accepts either string values for standard HTML elements, or function values for React components. This is often used for semantic element usage (`header`, `footer`, etc.).
 
 **Tip**: Use this in combination with `FlexContainer` to create flex items that are also flex containers.
 
