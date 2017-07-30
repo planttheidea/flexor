@@ -4,6 +4,7 @@ import sinon from 'sinon';
 
 // src
 import RuleCache from 'src/utils/RuleCache';
+import * as options from 'src/utils/options';
 
 test('if RuleCache will construct a cache object correctly', (t) => {
   const instance = new RuleCache();
@@ -13,25 +14,53 @@ test('if RuleCache will construct a cache object correctly', (t) => {
   t.is(instance.tag, null);
 });
 
-test('if RuleCache.add() will add the rule to the sheet on the instance tag, set the key in cache, and increment the index', (t) => {
+test.serial(
+  'if RuleCache.add() will add the rule to the sheet on the instance tag, set the key in cache, and increment the index',
+  (t) => {
+    const instance = new RuleCache();
+
+    instance.tag = {
+      sheet: {
+        insertRule: sinon.spy()
+      }
+    };
+
+    const key = 'foo';
+    const css = 'bar';
+
+    instance.add(key, css);
+
+    t.true(instance.tag.sheet.insertRule.calledOnce);
+    t.true(instance.tag.sheet.insertRule.calledWith(`[${key}]{${css}}`, 0));
+
+    t.true(instance.cache[key]);
+    t.is(instance.index, 1);
+  }
+);
+
+test.serial('if RuleCache.add() will add the rule as textContent to the style tag if debug is true', (t) => {
   const instance = new RuleCache();
 
+  const currentOptions = options.getOptions();
+
+  options.setOptions({
+    debug: true
+  });
+
+  const originalTextContent = 'foo';
+
   instance.tag = {
-    sheet: {
-      insertRule: sinon.spy()
-    }
+    textContent: originalTextContent
   };
 
   const key = 'foo';
-  const css = 'bar';
+  const css = 'bar;';
 
   instance.add(key, css);
 
-  t.true(instance.tag.sheet.insertRule.calledOnce);
-  t.true(instance.tag.sheet.insertRule.calledWith(`[${key}]{${css}}`, 0));
+  t.is(instance.tag.textContent, `${originalTextContent}\n\n[${key}] {\n  ${css}\n}`);
 
-  t.true(instance.cache[key]);
-  t.is(instance.index, 1);
+  options.setOptions(currentOptions);
 });
 
 test.serial('if assignTag will assign the tag to the cache and append it to the document head', (t) => {

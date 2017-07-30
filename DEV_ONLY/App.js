@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {findDOMNode} from 'react-dom';
 
-import {FlexContainer, FlexItem} from '../src';
+import {FlexContainer, FlexItem, setOptions} from '../src';
 
 // examples
 import ContainerWithAlignContentSet from '../examples/ContainerWithAlignContentSet';
@@ -10,6 +10,17 @@ import ItemsThatAreContainers from '../examples/ItemsThatAreContainers';
 import OrderedItems from '../examples/OrderedItems';
 import SizedGrowingItems from '../examples/SizedGrowingItems';
 import Standard from '../examples/Standard';
+
+setOptions(
+  {
+    // debug: true,
+    // prefix: (style) => {
+    //   console.log(style);
+    //
+    //   return style;
+    // }
+  }
+);
 
 const EXAMPLES = [
   {Component: Standard, name: 'Standard', id: 'standard'},

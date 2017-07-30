@@ -4,7 +4,7 @@ import sinon from 'sinon';
 
 // src
 import * as css from 'src/utils/css';
-import RuleCache from 'src/utils/RuleCache';
+import * as options from 'src/utils/options';
 
 test('if getCleanCssValue will return the value passed if flex-basis is not part of the key', (t) => {
   const key = 'foo';
@@ -166,4 +166,34 @@ test.serial('if createCssRule will call RuleCache.assignTag() if there is no tag
 
   css.ruleCache.assignTag = currentAssignTag;
   global.window = win;
+});
+
+test.serial('if createCssRule will use a custom prefixer in options if it exists', (t) => {
+  const currentAssignTag = css.ruleCache.assignTag;
+  const win = global.window;
+
+  css.ruleCache.assignTag = sinon.spy();
+
+  global.window = {};
+
+  const style = {
+    foo: 'bar'
+  };
+
+  const prefix = sinon.stub().returnsArg(0);
+  const currentOptions = options.getOptions();
+
+  options.setOptions({
+    prefix
+  });
+
+  css.createCssRule([style]);
+
+  t.true(prefix.calledOnce);
+  t.true(prefix.calledWith(style));
+
+  css.ruleCache.assignTag = currentAssignTag;
+  global.window = win;
+
+  options.setOptions(currentOptions);
 });

@@ -1,3 +1,9 @@
+// helpers
+import {fastReduce} from './helpers';
+
+// options
+import {getOptions} from './options';
+
 /**
  * @class RuleCache
  *
@@ -9,6 +15,47 @@ export default class RuleCache {
     this.cache = {};
     this.index = 0;
     this.tag = null;
+  }
+
+  /**
+   * @function _addRuleDebug
+   *
+   * @memberof RuleCache
+   * @instance
+   *
+   * @description
+   * add rules in a way that the styles can be debugged easily, or modified via devtools
+   *
+   * @param {string} key the key to assign the rule to
+   * @param {string} css the css rule
+   */
+  _addRuleDebug(key, css) {
+    const rules = css.split(';');
+    const prettyCss = fastReduce(
+      rules,
+      (allRules, rule) => {
+        return rule ? `${allRules}\n  ${rule.replace(':', ': ')};` : allRules;
+      },
+      ''
+    );
+
+    this.tag.textContent = `${this.tag.textContent}\n\n[${key}] {${prettyCss}\n}`.trim();
+  }
+
+  /**
+   * @function _addRuleStandard
+   *
+   * @memberof RuleCache
+   * @instance
+   *
+   * @description
+   * add rules in the default, fast way
+   *
+   * @param {string} key the key to assign the rule to
+   * @param {string} css the css rule
+   */
+  _addRuleStandard(key, css) {
+    this.tag.sheet.insertRule(`[${key}]{${css}}`, this.index);
   }
 
   /**
@@ -24,7 +71,10 @@ export default class RuleCache {
    * @param {string} css the css rule
    */
   add(key, css) {
-    this.tag.sheet.insertRule(`[${key}]{${css}}`, this.index);
+    const options = getOptions();
+    const addRule = options.debug ? this._addRuleDebug : this._addRuleStandard;
+
+    addRule.call(this, key, css);
 
     this.cache[key] = true;
     this.index++;
