@@ -1,5 +1,8 @@
 # flexor CHANGELOG
 
+## 1.1.0
+* Add global options `debug` and `prefix`
+
 ## 1.0.2
 * Surface `element` prop in README for semantic element declaration
 
