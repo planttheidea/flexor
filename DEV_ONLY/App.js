@@ -11,14 +11,16 @@ import OrderedItems from '../examples/OrderedItems';
 import SizedGrowingItems from '../examples/SizedGrowingItems';
 import Standard from '../examples/Standard';
 
-setOptions({
-  // debug: true,
-  prefix: (style) => {
-    console.log(style);
-
-    return style;
+setOptions(
+  {
+    // debug: true,
+    // prefix: (style) => {
+    //   console.log(style);
+    //
+    //   return style;
+    // }
   }
-});
+);
 
 const EXAMPLES = [
   {Component: Standard, name: 'Standard', id: 'standard'},
