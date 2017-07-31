@@ -111,6 +111,81 @@ test('if createGetDynamicStyle returns undefined when the prop does not exist on
   t.is(result, undefined);
 });
 
+test('if createMapOrPassedStyle creates a method that returns immediately if props does not contain the property', (t) => {
+  const prop = 'foo';
+  const map = {};
+
+  const getMapOrPassedStyle = styles.createMapOrPassedStyle(map, prop);
+
+  t.is(typeof getMapOrPassedStyle, 'function');
+
+  const props = {};
+
+  const result = getMapOrPassedStyle(props);
+
+  t.is(result, undefined);
+});
+
+test('if createMapOrPassedStyle creates a method that returns the value in map if the prop value exists as a property in the map', (t) => {
+  const prop = 'foo';
+  const value = 'bar';
+  const map = {
+    [value]: {
+      baz: 'baz'
+    }
+  };
+
+  const getMapOrPassedStyle = styles.createMapOrPassedStyle(map, prop);
+
+  t.is(typeof getMapOrPassedStyle, 'function');
+
+  const props = {
+    [prop]: value
+  };
+
+  const result = getMapOrPassedStyle(props);
+
+  t.is(result, map[value]);
+});
+
+test('if createMapOrPassedStyle creates a method that returns the value directly assign in map if the prop value does not exist as a property in the map', (t) => {
+  const prop = 'foo';
+  const value = 'bar';
+  const map = {};
+
+  const getMapOrPassedStyle = styles.createMapOrPassedStyle(map, prop);
+
+  t.is(typeof getMapOrPassedStyle, 'function');
+
+  const props = {
+    [prop]: value
+  };
+
+  const result = getMapOrPassedStyle(props);
+
+  t.deepEqual(result, {
+    [prop]: value
+  });
+});
+
+test('if createMapOrPassedStyle creates a method that returns undefined if no match is found or the value is falsy', (t) => {
+  const prop = 'foo';
+  const value = '';
+  const map = {};
+
+  const getMapOrPassedStyle = styles.createMapOrPassedStyle(map, prop);
+
+  t.is(typeof getMapOrPassedStyle, 'function');
+
+  const props = {
+    [prop]: value
+  };
+
+  const result = getMapOrPassedStyle(props);
+
+  t.is(result, undefined);
+});
+
 test('if getAlignContentStyle returns the value on ALIGN_CONTENT_MAP if it exists', (t) => {
   const props = {
     alignContent: 'start'

@@ -72,7 +72,6 @@ The container of flexbox items (all possible options are shown, but none are req
 
 ```javascript
 <FlexContainer
-  align="top"
   alignContent="center"
   alignItems="start"
   column
@@ -81,6 +80,7 @@ The container of flexbox items (all possible options are shown, but none are req
   element="section"
   justifyContent="between"
   inline
+  inlineAlign="top"
   row
   rowReverse
   wrap="wrap"

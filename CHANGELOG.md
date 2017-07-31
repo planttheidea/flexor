@@ -1,5 +1,8 @@
 # flexor CHANGELOG
 
+## 1.1.1
+* Reduce footprint by making consistent style retriever utility method
+
 ## 1.1.0
 * Add global options `debug` and `prefix`
 

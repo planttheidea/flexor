@@ -30,9 +30,8 @@ export default class RuleCache {
    * @param {string} css the css rule
    */
   _addRuleDebug(key, css) {
-    const rules = css.split(';');
     const prettyCss = fastReduce(
-      rules,
+      css.split(';'),
       (allRules, rule) => {
         return rule ? `${allRules}\n  ${rule.replace(':', ': ')};` : allRules;
       },
@@ -72,9 +71,12 @@ export default class RuleCache {
    */
   add(key, css) {
     const options = getOptions();
-    const addRule = options.debug ? this._addRuleDebug : this._addRuleStandard;
 
-    addRule.call(this, key, css);
+    if (options.debug) {
+      this._addRuleDebug(key, css);
+    } else {
+      this._addRuleStandard(key, css);
+    }
 
     this.cache[key] = true;
     this.index++;
