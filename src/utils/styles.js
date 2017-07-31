@@ -49,6 +49,36 @@ export const createGetDynamicStyle = (map, prefix, prop, defaultProp) => {
 };
 
 /**
+ * @function createMapOrPassedStyle
+ *
+ * @description
+ * create a method that gets either the mapped style or the style with the value passed
+ *
+ * @param {Object} map the map of styles
+ * @param {string} prop the prop retrieved from props
+ * @returns {function(Object): Object} the method to get the style
+ */
+export const createMapOrPassedStyle = (map, prop) => {
+  return (props) => {
+    if (!props.hasOwnProperty(prop)) {
+      return;
+    }
+
+    const value = props[prop];
+
+    if (map.hasOwnProperty(value)) {
+      return map[value];
+    }
+
+    if (value) {
+      return {
+        [prop]: value
+      };
+    }
+  };
+};
+
+/**
  * @function getAlignContentStyle
  *
  * @description
@@ -57,17 +87,7 @@ export const createGetDynamicStyle = (map, prefix, prop, defaultProp) => {
  * @param {string} alignContent the value passed for align-content
  * @returns {Object} the merged style object
  */
-export const getAlignContentStyle = ({alignContent}) => {
-  if (ALIGN_CONTENT_MAP.hasOwnProperty(alignContent)) {
-    return ALIGN_CONTENT_MAP[alignContent];
-  }
-
-  if (alignContent) {
-    return {
-      alignContent
-    };
-  }
-};
+export const getAlignContentStyle = createMapOrPassedStyle(ALIGN_CONTENT_MAP, 'alignContent');
 
 /**
  * @function getAlignItemsStyle
@@ -112,17 +132,7 @@ export const getAlignItemsStyle = ({alignItems, column}) => {
  * @param {string} alignSelf the align-self value
  * @returns {Object} the merged style object
  */
-export const getAlignSelfStyle = ({alignSelf}) => {
-  if (ALIGN_SELF_MAP.hasOwnProperty(alignSelf)) {
-    return ALIGN_SELF_MAP[alignSelf];
-  }
-
-  if (alignSelf) {
-    return {
-      alignSelf
-    };
-  }
-};
+export const getAlignSelfStyle = createMapOrPassedStyle(ALIGN_SELF_MAP, 'alignSelf');
 
 /**
  * @function getBasisStyle
@@ -204,17 +214,7 @@ export const getDirectionStyle = ({column, columnReverse, direction, row, rowRev
  * @param {string} justifyContent the value passed for justify-content
  * @returns {Object} the merged style object
  */
-export const getJustifyContentStyle = ({justifyContent}) => {
-  if (JUSTIFY_CONTENT_MAP.hasOwnProperty(justifyContent)) {
-    return JUSTIFY_CONTENT_MAP[justifyContent];
-  }
-
-  if (justifyContent) {
-    return {
-      justifyContent
-    };
-  }
-};
+export const getJustifyContentStyle = createMapOrPassedStyle(JUSTIFY_CONTENT_MAP, 'justifyContent');
 
 /**
  * @function getGrowStyle
