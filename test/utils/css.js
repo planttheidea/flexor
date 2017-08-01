@@ -33,6 +33,15 @@ test('if getCleanCssValue will return the value passed with px suffix if the key
   t.is(result, `${value}px`);
 });
 
+test('if getCssString will combine the key and value into the correct css string', (t) => {
+  const key = 'foo';
+  const value = 'bar';
+
+  const result = css.getCssString(key, value);
+
+  t.is(result, `${key}:${value};`);
+});
+
 test('if getMergedStyle will merge the array of styles passed into a new object', (t) => {
   const firstStyle = {
     foo: 'bar'
@@ -53,15 +62,6 @@ test('if getMergedStyle will merge the array of styles passed into a new object'
   t.not(mergedStyle, secondStyle);
 });
 
-test('if getCssString will combine the key and value into the correct css string', (t) => {
-  const key = 'foo';
-  const value = 'bar';
-
-  const result = css.getCssString(key, value);
-
-  t.is(result, `${key}:${value};`);
-});
-
 test('if getOrderedCssString will set the newCSs first if the key is a vendor prefix', (t) => {
   const key = '-foo';
   const existingCss = 'bar';
@@ -80,6 +80,22 @@ test('if getOrderedCssString will set the newCSs last if the key is not a vendor
   const result = css.getOrderedCssString(key, existingCss, newCss);
 
   t.is(result, `${existingCss}${newCss}`);
+});
+
+test('if getPrefixedStyleName works correctly with standard camelCased properties', (t) => {
+  const styleNames = ['boxSizing', 'display', 'borderTopLeftRadius'];
+
+  const results = styleNames.map(css.getPrefixedStyleName);
+
+  t.deepEqual(results, ['box-sizing', 'display', 'border-top-left-radius']);
+});
+
+test('if getPrefixedStyleName works correctly with vendor prefixed properties', (t) => {
+  const styleNames = ['WebkitColumns', 'MozLinearGradient', 'msFlex'];
+
+  const results = styleNames.map(css.getPrefixedStyleName);
+
+  t.deepEqual(results, ['-webkit-columns', '-moz-linear-gradient', '-ms-flex']);
 });
 
 test('if getStyleAsCssString will convert the object to a css string when no values are arrays', (t) => {

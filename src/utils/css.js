@@ -1,6 +1,5 @@
 // external dependencies
 import moize from 'moize';
-import hyphenateStyleName from 'fbjs/lib/hyphenateStyleName';
 
 // cache
 import RuleCache from './RuleCache';
@@ -11,12 +10,20 @@ import {fastReduce, merge} from './helpers';
 // options
 import {getOptions} from './options';
 
-const getPrefixedStyleName = moize(hyphenateStyleName);
-
 /**
  * @constant {RegExp} FLEX_BASIS_REGEXP
  */
 export const FLEX_BASIS_REGEXP = /flex-basis/;
+
+/**
+ * @constant {RegExp} UPPERCASE_REGEXP
+ */
+export const UPPERCASE_REGEXP = /([A-Z])/g;
+
+/**
+ * @constant {RegExp} MS_PREFIX_REGEXP
+ */
+export const MS_PREFIX_REGEXP = /^ms-/;
 
 /**
  * @constant {RuleCache} ruleCache
@@ -98,6 +105,19 @@ export const getOrderedCssString = (key, existingCss, newCss) => {
 export const getMergedStyle = (styles) => {
   return fastReduce(styles, merge, {});
 };
+
+/**
+ * @function getPrefixedStyleName
+ *
+ * @description
+ * get the prefixed styleName based on PascalCase => -kebab-case conventions
+ *
+ * @param {string} styleName the name of the style to transform
+ * @returns {string} the transformed styleName
+ */
+export const getPrefixedStyleName = moize((styleName) => {
+  return styleName.replace(UPPERCASE_REGEXP, '-$1').toLowerCase().replace(MS_PREFIX_REGEXP, '-ms-');
+});
 
 /**
  * @function getStyleAsCssString
