@@ -1,5 +1,8 @@
 # flexor CHANGELOG
 
+## 1.1.2
+* Remove `fbjs` dependency
+
 ## 1.1.1
 * Reduce footprint by making consistent style retriever utility method
 
