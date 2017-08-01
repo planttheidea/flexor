@@ -4,30 +4,16 @@
     "babel": "inherit",
     "concurrency": 5,
     "failFast": true,
-    "files": [
-      "test/**/*.js"
-    ],
-    "require": [
-      "babel-register"
-    ],
-    "source": [
-      "src/**/*.js"
-    ],
+    "files": ["test/**/*.js"],
+    "require": ["babel-register"],
+    "source": ["src/**/*.js"],
     "verbose": true
   },
-  "browserslist": [
-    "defaults",
-    "Explorer >= 11",
-    "Safari >= 8",
-    "Opera >= 16",
-    "iOS >= 8",
-    "Android >= 4"
-  ],
+  "browserslist": ["defaults", "Explorer >= 11", "Safari >= 8", "Opera >= 16", "iOS >= 8", "Android >= 4"],
   "bugs": {
     "url": "https://github.com/planttheidea/flexor/issues"
   },
   "dependencies": {
-    "fbjs": "^0.8.14",
     "inline-style-prefixer": "^3.0.7",
     "moize": "^3.3.0"
   },
@@ -70,11 +56,7 @@
     "webpack-dev-server": "^2.5.1"
   },
   "homepage": "https://github.com/planttheidea/flexor#readme",
-  "keywords": [
-    "flexbox",
-    "react",
-    "flex"
-  ],
+  "keywords": ["flexbox", "react", "flex"],
   "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",

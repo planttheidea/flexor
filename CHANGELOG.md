@@ -1,5 +1,8 @@
 # flexor CHANGELOG
 
+## 1.1.3
+* Actually remove `fbjs` from dependencies in package.json
+
 ## 1.1.2
 * Remove `fbjs` dependency
 
