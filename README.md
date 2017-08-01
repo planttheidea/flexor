@@ -33,6 +33,8 @@ class App extends PureComponent {
 
 This library provides a declarative and streamlined approach towards building flexbox-based layouts, building on top of existing knowledge while removing the boilerplate. It targets implementation simplicity without sacrificing the full capabilities of flexbox.
 
+There are a number of common usage examples provided in [the examples in the `dev` app](examples).
+
 ## Table of contents
 * [Usage](#usage)
 * [Components](#components)
@@ -61,8 +63,6 @@ This library provides a declarative and streamlined approach towards building fl
 * [Browser support](#browser-support)
 * [External dependencies](#external-dependencies)
 * [Development](#development)
-
-There are a number of common usage examples provided in [the examples in the `dev` app](examples).
 
 ## Components
 
