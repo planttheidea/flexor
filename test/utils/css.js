@@ -1,10 +1,12 @@
 // test
 import test from 'ava';
+import {JSDOM} from 'jsdom';
 import sinon from 'sinon';
 
 // src
 import * as css from 'src/utils/css';
 import * as options from 'src/utils/options';
+import * as flexbugsStyleConstants from 'src/styles/flexbugs';
 
 test('if getCleanCssValue will return the value passed if flex-basis is not part of the key', (t) => {
   const key = 'foo';
@@ -133,6 +135,20 @@ test('if getHash will create a unique numerical hash based on the string passed'
   }
 });
 
+test.serial('if addFlexbugRules will call add for each selector key in FLEXBUG_STYLES', (t) => {
+  const addStub = sinon.stub(css.ruleCache, 'add');
+
+  css.addFlexbugRules();
+
+  t.is(addStub.callCount, Object.keys(flexbugsStyleConstants.FLEXBUG_STYLES).length);
+
+  Object.keys(flexbugsStyleConstants.FLEXBUG_STYLES).forEach((key, index) => {
+    t.deepEqual(addStub.args[index], [key, css.getStyleAsCssString(flexbugsStyleConstants.FLEXBUG_STYLES[key])]);
+  });
+
+  addStub.restore();
+});
+
 test.serial('if createCssRule will return an object with a unique data key', (t) => {
   const currentTag = css.ruleCache.tag;
 
@@ -157,16 +173,23 @@ test.serial('if createCssRule will return an object with a unique data key', (t)
   const hash = css.getHash(css.getStyleAsCssString(css.getMergedStyle([firstStyle, secondStyle])));
 
   t.deepEqual(result, {
+    'data-flexor-item': '',
     [`data-flexor-${hash}`]: ''
   });
 });
 
 test.serial('if createCssRule will call RuleCache.assignTag() if there is no tag and window is not undefined', (t) => {
-  const currentAssignTag = css.ruleCache.assignTag;
-  const win = global.window;
+  const {window} = new JSDOM();
 
-  css.ruleCache.assignTag = sinon.spy();
-  global.window = {};
+  const assignTagSpy = sinon.spy(css.ruleCache, 'assignTag');
+
+  const win = global.window;
+  const doc = global.document;
+
+  global.window = window;
+  global.document = window.document;
+
+  const addStub = sinon.stub(css.ruleCache, 'add');
 
   const firstStyle = {
     foo: 'bar'
@@ -178,19 +201,25 @@ test.serial('if createCssRule will call RuleCache.assignTag() if there is no tag
 
   css.createCssRule([firstStyle, secondStyle]);
 
-  t.true(css.ruleCache.assignTag.calledOnce);
+  t.true(assignTagSpy.calledOnce);
+  t.is(addStub.callCount, Object.keys(flexbugsStyleConstants.FLEXBUG_STYLES).length);
 
-  css.ruleCache.assignTag = currentAssignTag;
+  addStub.restore();
+
   global.window = win;
+  global.document = doc;
 });
 
 test.serial('if createCssRule will use a custom prefixer in options if it exists', (t) => {
-  const currentAssignTag = css.ruleCache.assignTag;
+  const {window} = new JSDOM();
+
   const win = global.window;
+  const doc = global.document;
 
-  css.ruleCache.assignTag = sinon.spy();
+  global.window = window;
+  global.document = window.document;
 
-  global.window = {};
+  const addStub = sinon.stub(css.ruleCache, 'add');
 
   const style = {
     foo: 'bar'
@@ -208,8 +237,54 @@ test.serial('if createCssRule will use a custom prefixer in options if it exists
   t.true(prefix.calledOnce);
   t.true(prefix.calledWith(style));
 
-  css.ruleCache.assignTag = currentAssignTag;
+  addStub.restore();
+
   global.window = win;
+  global.document = doc;
+
+  options.setOptions(currentOptions);
+});
+
+test.serial('if createCssRule will only call addFlexbugRules if fixFlexbugs is true', (t) => {
+  const {window} = new JSDOM();
+
+  const win = global.window;
+  const doc = global.document;
+
+  global.window = window;
+  global.document = window.document;
+
+  const addStub = sinon.stub(css.ruleCache, 'add');
+
+  const style = {
+    foo: 'bar'
+  };
+
+  const currentOptions = options.getOptions();
+
+  options.setOptions({
+    fixFlexbugs: false
+  });
+
+  css.createCssRule([style]);
+
+  t.is(addStub.callCount, 1);
+
+  addStub.reset();
+  css.ruleCache.tag = null;
+
+  options.setOptions({
+    fixFlexbugs: true
+  });
+
+  css.createCssRule([style]);
+
+  t.is(addStub.callCount, 5);
+
+  addStub.restore();
+
+  global.window = win;
+  global.document = doc;
 
   options.setOptions(currentOptions);
 });

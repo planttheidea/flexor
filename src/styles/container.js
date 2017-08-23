@@ -73,13 +73,6 @@ export const ALIGN_ITEMS_MAP = getMappedStyles('alignItems', {
 });
 
 /**
- * @constant {Object} ALIGN_ITEMS_COLUMN_FIX
- */
-export const ALIGN_ITEMS_COLUMN_FIX = {
-  maxWidth: '100%'
-};
-
-/**
  * @constant {Object} DEFAULT_CONTAINER
  */
 export const DEFAULT_CONTAINER = {

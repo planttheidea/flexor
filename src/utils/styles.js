@@ -4,7 +4,6 @@ import {createCssRule} from './css';
 // styles
 import {
   ALIGN_CONTENT_MAP,
-  ALIGN_ITEMS_COLUMN_FIX,
   ALIGN_ITEMS_MAP,
   INLINE_ALIGN_MAP,
   DEFAULT_CONTAINER,
@@ -13,6 +12,7 @@ import {
   JUSTIFY_CONTENT_MAP,
   WRAP_MAP
 } from '../styles/container';
+import {ALIGN_ITEMS_COLUMN_FIX} from '../styles/flexbugs';
 import {ALIGN_SELF_MAP, DEFAULT_ITEM, GROW_MAP, ORDER_MAP, SHRINK_MAP} from '../styles/item';
 
 // utils
