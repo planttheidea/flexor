@@ -8,8 +8,11 @@ test.serial('if getOptions will retrieve the options in the closure', (t) => {
   const opts = options.getOptions();
 
   t.is(typeof opts, 'object');
-  t.deepEqual(Object.keys(opts), ['debug', 'prefix']);
+
+  t.deepEqual(Object.keys(opts), ['debug', 'fixFlexbugs', 'prefix']);
+
   t.false(opts.debug);
+  t.true(opts.fixFlexbugs);
   t.is(typeof opts.prefix, 'function');
 });
 

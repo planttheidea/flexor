@@ -282,6 +282,7 @@ The following global options are available:
 ```javascript
 {
   debug: boolean, // defaults to false
+  fixFlexbugs: boolean, // defaults to true
   prefix: Function // defaults to prefixAll from inline-style-prefixer
 }
 ```
@@ -291,6 +292,7 @@ To modify any of the options, you can call the `setOptions` method with an objec
 ```javascript
 setOptions({
   debug: true,
+  fixFlexbugs: false,
   prefix: myCustomPrefixer
 })
 ```
@@ -300,6 +302,14 @@ setOptions({
 *boolean, defaults to false*
 
 By default the styles will be added to a style tag using the very fast `insertRule` API for stylesheets. The drawback with this is that it is difficult to diagnose style declarations, and sourcemaps do not work (as there is no explicit source). By setting `debug` to `true`, the styles will instead be appended as `textContent` to the `style` tag, so that the styles applied are traceable and can be altered in devtools.
+
+#### fixFlexbugs
+
+*boolean, defaults to true*
+
+By default `flexor` will apply additional CSS values to containers and items in specific situations to work around buggy [flexbox implementations on older browsers](https://github.com/philipwalton/flexbugs). If you set this option to `false`, it will disable these workarounds.
+
+**Tip**: These workarounds may result in your own CSS getting overridden in very specific scenarios (example: explicitly declaring a `min-height` on items inside of a `column` flex container). Making your own CSS more specific by providing a parent selector should suffice.
 
 #### prefix
 

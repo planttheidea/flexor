@@ -53,5 +53,5 @@ export const DEFAULT_ITEM = {
   ...GROW_MAP.GROW_1,
   ...SHRINK_MAP.SHRINK_1,
   boxSizing: 'border-box',
-  flexBasis: 'auto'
+  flexBasis: '0%'
 };

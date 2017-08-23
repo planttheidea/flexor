@@ -13,6 +13,7 @@ import {getOptions} from './options';
 export default class RuleCache {
   constructor() {
     this.cache = {};
+    this.hasDefaultStyles = false;
     this.index = 0;
     this.tag = null;
   }
@@ -92,12 +93,12 @@ export default class RuleCache {
    * assign the tag to the instance and append it to the document head
    */
   assignTag() {
-    const tag = (this.tag = document.createElement('style'));
+    this.tag = document.createElement('style');
 
     this.tag.appendChild(document.createTextNode(''));
     this.tag.id = 'flexor-styles';
 
-    document.head.appendChild(tag);
+    document.head.appendChild(this.tag);
   }
 
   /**

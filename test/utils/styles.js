@@ -5,6 +5,7 @@ import sinon from 'sinon';
 // src
 import * as styles from 'src/utils/styles';
 import * as containerStyleConstants from 'src/styles/container';
+import * as flexbugsStyleConstants from 'src/styles/flexbugs';
 import * as css from 'src/utils/css';
 import * as helpers from 'src/utils/helpers';
 import * as itemStyleConstants from 'src/styles/item';
@@ -240,7 +241,7 @@ test('if getAlignItemsStyle returns the value on ALIGN_ITEMS_MAP and the ALIGN_I
   t.true(containerStyleConstants.ALIGN_ITEMS_MAP.hasOwnProperty(props.alignItems));
   t.deepEqual(result, {
     ...containerStyleConstants.ALIGN_ITEMS_MAP.start,
-    ...containerStyleConstants.ALIGN_ITEMS_COLUMN_FIX
+    ...flexbugsStyleConstants.ALIGN_ITEMS_COLUMN_FIX
   });
 });
 
@@ -268,7 +269,7 @@ test('if getAlignItemsStyle returns the value passed as an object with the ALIGN
   t.false(containerStyleConstants.ALIGN_ITEMS_MAP.hasOwnProperty(props.alignItems));
   t.deepEqual(result, {
     alignItems: props.alignItems,
-    ...containerStyleConstants.ALIGN_ITEMS_COLUMN_FIX
+    ...flexbugsStyleConstants.ALIGN_ITEMS_COLUMN_FIX
   });
 });
 
@@ -756,10 +757,10 @@ test('if getContainerStyles correctly uses createGetCompleteStyles for container
 
   const keys = Object.keys(result);
 
-  t.is(keys.length, 1);
+  t.is(keys.length, 2);
 
   keys.forEach((key) => {
-    t.true(/data-flexor-([0-9])/.test(key));
+    t.true(/data-flexor-([0-9]|item|container)/.test(key));
   });
 });
 
@@ -784,9 +785,9 @@ test('if getItemStyles correctly uses createGetCompleteStyles for items', (t) =>
 
   const keys = Object.keys(result);
 
-  t.is(keys.length, 1);
+  t.is(keys.length, 2);
 
   keys.forEach((key) => {
-    t.true(/data-flexor-([0-9])/.test(key));
+    t.true(/data-flexor-([0-9]|item|container)/.test(key));
   });
 });

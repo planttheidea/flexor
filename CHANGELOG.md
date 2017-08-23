@@ -1,5 +1,8 @@
 # flexor CHANGELOG
 
+## 1.2.0
+* Provide additional flexbug fixes
+
 ## 1.1.3
 * Actually remove `fbjs` from dependencies in package.json
 

@@ -10,6 +10,9 @@ import {fastReduce, merge} from './helpers';
 // options
 import {getOptions} from './options';
 
+// styles
+import {FLEXBUG_STYLES} from '../styles/flexbugs';
+
 /**
  * @constant {RegExp} FLEX_BASIS_REGEXP
  */
@@ -150,6 +153,20 @@ export const getStyleAsCssString = moize((style) => {
 });
 
 /**
+ * @function addFlexbugRules
+ *
+ * @description
+ * add the global rules related to flexbugs
+ */
+export const addFlexbugRules = () => {
+  Object.keys(FLEXBUG_STYLES).forEach((selector) => {
+    ruleCache.add(selector, getStyleAsCssString(FLEXBUG_STYLES[selector]));
+  });
+
+  ruleCache.hasDefaultStyles = true;
+};
+
+/**
  * @function createCssRule
  *
  * @description
@@ -160,12 +177,19 @@ export const getStyleAsCssString = moize((style) => {
  * @returns {Object} the selector object to apply to the flex elements
  */
 export const createCssRule = (styles) => {
+  const options = getOptions();
+
   if (!ruleCache.tag && typeof window !== 'undefined') {
     ruleCache.assignTag();
+
+    if (options.fixFlexbugs) {
+      addFlexbugRules();
+    }
   }
 
-  const options = getOptions();
-  const cssString = getStyleAsCssString(options.prefix(getMergedStyle(styles)));
+  const mergedStyles = getMergedStyle(styles);
+  const type = `data-flexor-${mergedStyles.display ? `container-${mergedStyles.flexDirection}` : 'item'}`;
+  const cssString = getStyleAsCssString(options.prefix(mergedStyles));
   const uniqueKey = `data-flexor-${getHash(cssString)}`;
 
   if (ruleCache.tag && !ruleCache.has(uniqueKey)) {
@@ -173,6 +197,7 @@ export const createCssRule = (styles) => {
   }
 
   return {
+    [type]: '',
     [uniqueKey]: ''
   };
 };

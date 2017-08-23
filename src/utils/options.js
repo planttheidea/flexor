@@ -4,6 +4,7 @@ import prefixAll from 'inline-style-prefixer/static';
 
 let options = {
   debug: false,
+  fixFlexbugs: true,
   prefix: moize.serialize(prefixAll)
 };
 

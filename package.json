@@ -4,56 +4,44 @@
     "babel": "inherit",
     "concurrency": 5,
     "failFast": true,
-    "files": [
-      "test/**/*.js"
-    ],
-    "require": [
-      "babel-register"
-    ],
-    "source": [
-      "src/**/*.js"
-    ],
+    "files": ["test/**/*.js"],
+    "require": ["babel-register"],
+    "source": ["src/**/*.js"],
     "verbose": true
   },
-  "browserslist": [
-    "defaults",
-    "Explorer >= 11",
-    "Safari >= 8",
-    "Opera >= 16",
-    "iOS >= 8",
-    "Android >= 4"
-  ],
+  "browserslist": ["defaults", "Explorer >= 11", "Safari >= 8", "Opera >= 16", "iOS >= 8", "Android >= 4"],
   "bugs": {
     "url": "https://github.com/planttheidea/flexor/issues"
   },
   "dependencies": {
     "inline-style-prefixer": "^3.0.7",
-    "moize": "^3.3.0"
+    "moize": "^3.4.0"
   },
   "description": "Flexbox, done the React way.",
   "devDependencies": {
-    "ava": "^0.21.0",
-    "babel-cli": "^6.24.1",
+    "ava": "^0.22.0",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^7.2.3",
-    "babel-loader": "^7.1.1",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.6",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.8",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.24.1",
-    "browser-env": "^3.1.0",
+    "babel-register": "^6.26.0",
+    "browser-env": "^3.1.2",
     "enzyme": "^2.9.1",
     "enzyme-to-json": "^1.5.1",
-    "eslint": "^4.2.0",
+    "eslint": "^4.5.0",
     "eslint-config-prettier": "^2.3.0",
-    "eslint-config-rapid7": "^2.11.0",
+    "eslint-config-rapid7": "^2.11.1",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.9.0",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
     "in-publish": "^2.0.0",
-    "jsdoc": "^3.5.3",
-    "lint-staged": "^4.0.2",
+    "jsdoc": "^3.5.4",
+    "jsdom": "^11.2.0",
+    "lint-staged": "^4.0.3",
     "lodash": "^4.17.4",
     "nyc": "^11.0.3",
     "optimize-js-plugin": "^0.0.4",
@@ -63,17 +51,13 @@
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
     "rimraf": "^2.6.1",
-    "sinon": "^2.4.1",
-    "webpack": "^3.4.1",
-    "webpack-dashboard": "^0.4.0",
-    "webpack-dev-server": "^2.5.1"
+    "sinon": "^3.2.1",
+    "webpack": "^3.5.5",
+    "webpack-dashboard": "^1.0.0-5",
+    "webpack-dev-server": "^2.7.1"
   },
   "homepage": "https://github.com/planttheidea/flexor#readme",
-  "keywords": [
-    "flexbox",
-    "react",
-    "flex"
-  ],
+  "keywords": ["flexbox", "react", "flex"],
   "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -101,7 +85,7 @@
     "prettify": "prettier --single-quote --no-bracket-spacing --write 'src/*.js'",
     "start": "npm run dev:dashboard",
     "test": "NODE_PATH=. NODE_ENV=production BABEL_ENV=test ava",
-    "test:coverage": "nyc npm test",
+    "test:coverage": "nyc --cache npm test",
     "test:update": "npm test -- --update-snapshots",
     "test:watch": "npm test -- --watch",
     "transpile:lib": "npm run clean:lib && babel src --out-dir lib",
