@@ -4,12 +4,26 @@
     "babel": "inherit",
     "concurrency": 5,
     "failFast": true,
-    "files": ["test/**/*.js"],
-    "require": ["babel-register", "test/helpers/setup-environment.js"],
-    "source": ["src/**/*.js"],
+    "files": [
+      "test/**/*.js"
+    ],
+    "require": [
+      "babel-register",
+      "test/helpers/setup-environment.js"
+    ],
+    "source": [
+      "src/**/*.js"
+    ],
     "verbose": true
   },
-  "browserslist": ["defaults", "Explorer >= 11", "Safari >= 8", "Opera >= 16", "iOS >= 8", "Android >= 4"],
+  "browserslist": [
+    "defaults",
+    "Explorer >= 11",
+    "Safari >= 8",
+    "Opera >= 16",
+    "iOS >= 8",
+    "Android >= 4"
+  ],
   "bugs": {
     "url": "https://github.com/planttheidea/flexor/issues"
   },
@@ -59,7 +73,11 @@
     "webpack-shell-plugin": "^0.5.0"
   },
   "homepage": "https://github.com/planttheidea/flexor#readme",
-  "keywords": ["flexbox", "react", "flex"],
+  "keywords": [
+    "flexbox",
+    "react",
+    "flex"
+  ],
   "license": "MIT",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -93,5 +111,5 @@
     "transpile:lib": "npm run clean:lib && babel src --out-dir lib",
     "transpile:es": "npm run clean:es && BABEL_ENV=es babel src --out-dir es"
   },
-  "version": "1.2.0"
+  "version": "1.2.1"
 }
