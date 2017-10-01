@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
-import React, {
-  PureComponent
-} from 'react';
+import React, {PureComponent} from 'react';
 
-import {
-  FlexContainer,
-  FlexItem
-} from '../src';
+import {FlexContainer, FlexItem} from '../src';
 
 class Standard extends PureComponent {
   static propTypes = {
@@ -14,9 +9,7 @@ class Standard extends PureComponent {
   };
 
   render() {
-    const {
-      id
-    } = this.props;
+    const {id} = this.props;
 
     return (
       <div
@@ -28,13 +21,9 @@ class Standard extends PureComponent {
         <h4>row</h4>
 
         <FlexContainer className="container">
-          <FlexItem className="child">
-            First child
-          </FlexItem>
+          <FlexItem className="child">First child</FlexItem>
 
-          <FlexItem className="child">
-            Second child
-          </FlexItem>
+          <FlexItem className="child">Second child</FlexItem>
         </FlexContainer>
 
         <h4>column</h4>
@@ -43,13 +32,9 @@ class Standard extends PureComponent {
           className="container column-container"
           column
         >
-          <FlexItem className="child">
-            First child
-          </FlexItem>
+          <FlexItem className="child">First child</FlexItem>
 
-          <FlexItem className="child">
-            Second child
-          </FlexItem>
+          <FlexItem className="child">Second child</FlexItem>
         </FlexContainer>
 
         <h4>row reversed</h4>
@@ -58,13 +43,9 @@ class Standard extends PureComponent {
           className="container"
           rowReverse
         >
-          <FlexItem className="child">
-            First child
-          </FlexItem>
+          <FlexItem className="child">First child</FlexItem>
 
-          <FlexItem className="child">
-            Second child
-          </FlexItem>
+          <FlexItem className="child">Second child</FlexItem>
         </FlexContainer>
 
         <h4>column reversed</h4>
@@ -73,13 +54,9 @@ class Standard extends PureComponent {
           className="container column-container"
           columnReverse
         >
-          <FlexItem className="child">
-            First child
-          </FlexItem>
+          <FlexItem className="child">First child</FlexItem>
 
-          <FlexItem className="child">
-            Second child
-          </FlexItem>
+          <FlexItem className="child">Second child</FlexItem>
         </FlexContainer>
 
         <div>
@@ -89,13 +66,9 @@ class Standard extends PureComponent {
             className="container container-inline"
             inline
           >
-            <FlexItem className="child">
-              First item
-            </FlexItem>
+            <FlexItem className="child">First item</FlexItem>
 
-            <FlexItem className="child">
-              Second item
-            </FlexItem>
+            <FlexItem className="child">Second item</FlexItem>
           </FlexContainer>
 
           <FlexContainer
@@ -121,13 +94,9 @@ class Standard extends PureComponent {
             inline
             inlineAlign="top"
           >
-            <FlexItem className="child">
-              First item
-            </FlexItem>
+            <FlexItem className="child">First item</FlexItem>
 
-            <FlexItem className="child">
-              Second item
-            </FlexItem>
+            <FlexItem className="child">Second item</FlexItem>
           </FlexContainer>
 
           <FlexContainer

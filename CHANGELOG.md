@@ -1,5 +1,8 @@
 # flexor CHANGELOG
 
+## 1.2.1
+* Add support for `react` 16
+
 ## 1.2.0
 * Provide additional flexbug fixes
 

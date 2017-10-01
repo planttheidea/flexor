@@ -94,10 +94,14 @@ class App extends PureComponent {
           ref={this.setScrollContainerRef}
         >
           {EXAMPLES.map(({Component, id}) => {
-            return (<Component
-              id={id}
-              key={`component-${id}`}
-            />);
+            return (
+              /* eslint-disable prettier */
+              <Component
+                id={id}
+                key={`component-${id}`}
+              />
+              /* eslint-enable */
+            );
           })}
         </FlexItem>
       </FlexContainer>

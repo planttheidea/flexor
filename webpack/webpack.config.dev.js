@@ -2,7 +2,6 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackDashboard = require('webpack-dashboard/plugin');
 
 const defaultConfig = require('./webpack.config');
 
@@ -13,17 +12,10 @@ module.exports = Object.assign({}, defaultConfig, {
   cache: true,
 
   devServer: {
+    compress: true,
     contentBase: './dist',
     host: 'localhost',
-    inline: true,
-    lazy: false,
-    noInfo: false,
-    quiet: false,
     port: PORT,
-    stats: {
-      colors: true,
-      progress: true
-    },
     watchOptions: {
       ignored: /node_modules/
     }
@@ -49,10 +41,5 @@ module.exports = Object.assign({}, defaultConfig, {
     publicPath: `http://localhost:${PORT}/`
   }),
 
-  plugins: defaultConfig.plugins.concat([
-    new HtmlWebpackPlugin(),
-    new WebpackDashboard({
-      port: 3210
-    })
-  ])
+  plugins: defaultConfig.plugins.concat([new HtmlWebpackPlugin()])
 });
