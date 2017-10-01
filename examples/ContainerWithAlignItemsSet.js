@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
-import React, {
-  PureComponent
-} from 'react';
+import React, {PureComponent} from 'react';
 
-import {
-  FlexContainer,
-  FlexItem
-} from '../src';
+import {FlexContainer, FlexItem} from '../src';
 
 class ContainerWithAlignItemsSet extends PureComponent {
   static propTypes = {
@@ -14,9 +9,7 @@ class ContainerWithAlignItemsSet extends PureComponent {
   };
 
   render() {
-    const {
-      id
-    } = this.props;
+    const {id} = this.props;
 
     return (
       <div
@@ -38,9 +31,7 @@ class ContainerWithAlignItemsSet extends PureComponent {
             Sized-to-fit child
           </FlexItem>
 
-          <FlexItem className="child">
-            Growing child
-          </FlexItem>
+          <FlexItem className="child">Growing child</FlexItem>
 
           <FlexItem
             className="child"
@@ -64,9 +55,7 @@ class ContainerWithAlignItemsSet extends PureComponent {
             Sized-to-fit child
           </FlexItem>
 
-          <FlexItem className="child">
-            Growing child
-          </FlexItem>
+          <FlexItem className="child">Growing child</FlexItem>
 
           <FlexItem
             className="child"
@@ -89,9 +78,7 @@ class ContainerWithAlignItemsSet extends PureComponent {
             Sized-to-fit child
           </FlexItem>
 
-          <FlexItem className="child">
-            Growing child
-          </FlexItem>
+          <FlexItem className="child">Growing child</FlexItem>
 
           <FlexItem
             className="child"
@@ -115,9 +102,7 @@ class ContainerWithAlignItemsSet extends PureComponent {
             Sized-to-fit child
           </FlexItem>
 
-          <FlexItem className="child">
-            Growing child
-          </FlexItem>
+          <FlexItem className="child">Growing child</FlexItem>
 
           <FlexItem
             className="child"
@@ -140,9 +125,7 @@ class ContainerWithAlignItemsSet extends PureComponent {
             Sized-to-fit child
           </FlexItem>
 
-          <FlexItem className="child">
-            Growing child
-          </FlexItem>
+          <FlexItem className="child">Growing child</FlexItem>
 
           <FlexItem
             className="child"
@@ -166,9 +149,7 @@ class ContainerWithAlignItemsSet extends PureComponent {
             Sized-to-fit child
           </FlexItem>
 
-          <FlexItem className="child">
-            Growing child
-          </FlexItem>
+          <FlexItem className="child">Growing child</FlexItem>
 
           <FlexItem
             className="child"

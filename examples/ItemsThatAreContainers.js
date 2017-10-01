@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
-import React, {
-  PureComponent
-} from 'react';
+import React, {PureComponent} from 'react';
 
-import {
-  FlexContainer,
-  FlexItem
-} from '../src';
+import {FlexContainer, FlexItem} from '../src';
 
 class ItemsThatAreContainers extends PureComponent {
   static propTypes = {
@@ -14,9 +9,7 @@ class ItemsThatAreContainers extends PureComponent {
   };
 
   render() {
-    const {
-      id
-    } = this.props;
+    const {id} = this.props;
 
     return (
       <div

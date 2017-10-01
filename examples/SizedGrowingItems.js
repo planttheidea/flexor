@@ -1,12 +1,7 @@
 import PropTypes from 'prop-types';
-import React, {
-  PureComponent
-} from 'react';
+import React, {PureComponent} from 'react';
 
-import {
-  FlexContainer,
-  FlexItem
-} from '../src';
+import {FlexContainer, FlexItem} from '../src';
 
 class SizedGrowingItems extends PureComponent {
   static propTypes = {
@@ -14,9 +9,7 @@ class SizedGrowingItems extends PureComponent {
   };
 
   render() {
-    const {
-      id
-    } = this.props;
+    const {id} = this.props;
 
     return (
       <div
@@ -35,9 +28,7 @@ class SizedGrowingItems extends PureComponent {
             Sized-to-fit child
           </FlexItem>
 
-          <FlexItem className="child">
-            Growing child
-          </FlexItem>
+          <FlexItem className="child">Growing child</FlexItem>
 
           <FlexItem
             className="child"
@@ -60,9 +51,7 @@ class SizedGrowingItems extends PureComponent {
             Sized-to-fit child
           </FlexItem>
 
-          <FlexItem className="child">
-            Growing child
-          </FlexItem>
+          <FlexItem className="child">Growing child</FlexItem>
 
           <FlexItem
             className="child"
