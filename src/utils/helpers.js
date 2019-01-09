@@ -30,9 +30,8 @@ export const fastReduce = (array, fn, initialValue) => {
  * @param {number} size the size for the property
  * @returns {string} the appropriate prefxed property
  */
-export const getMappedSizePrefixedProperty = (prefix, size) => {
-  return size < 0 ? `${prefix}_NEGATIVE_${Math.abs(size)}` : `${prefix}_${size}`;
-};
+export const getMappedSizePrefixedProperty = (prefix, size) =>
+  size < 0 ? `${prefix}_NEGATIVE_${Math.abs(size)}` : `${prefix}_${size}`;
 
 /**
  * @function getMappedSizeStyles
@@ -45,20 +44,17 @@ export const getMappedSizePrefixedProperty = (prefix, size) => {
  * @param {string} property the CSS property to assign the size to
  * @returns {Object} the mapped size-based styles
  */
-export const getMappedSizeStyles = (sizes, prefix, property) => {
-  return fastReduce(
+export const getMappedSizeStyles = (sizes, prefix, property) =>
+  fastReduce(
     sizes,
-    (map, size) => {
-      return {
-        ...map,
-        [getMappedSizePrefixedProperty(prefix, size)]: {
-          [property]: size
-        }
-      };
-    },
+    (map, size) => ({
+      ...map,
+      [getMappedSizePrefixedProperty(prefix, size)]: {
+        [property]: size,
+      },
+    }),
     {}
   );
-};
 
 /**
  * @function getMappedStyles
@@ -70,20 +66,17 @@ export const getMappedSizeStyles = (sizes, prefix, property) => {
  * @param {Object} object the object of key => value pairs to assign to the property
  * @returns {Object} the mapped styles
  */
-export const getMappedStyles = (property, object) => {
-  return fastReduce(
+export const getMappedStyles = (property, object) =>
+  fastReduce(
     Object.keys(object),
-    (map, key) => {
-      return {
-        ...map,
-        [key]: {
-          [property]: object[key]
-        }
-      };
-    },
+    (map, key) => ({
+      ...map,
+      [key]: {
+        [property]: object[key],
+      },
+    }),
     {}
   );
-};
 
 /**
  * @function merge

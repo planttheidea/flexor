@@ -11,20 +11,9 @@ module.exports = {
 
   entry: [path.join(ROOT, 'src', 'index.js')],
 
-  externals: {
-    moize: {
-      amd: 'moize',
-      commonjs: 'moize',
-      commonjs2: 'moize',
-      root: 'moize'
-    },
-    react: {
-      amd: 'react',
-      commonjs: 'react',
-      commonjs2: 'react',
-      root: 'React'
-    }
-  },
+  externals: ['moize', 'react'],
+
+  mode: 'development',
 
   module: {
     rules: [
@@ -37,9 +26,9 @@ module.exports = {
           failOnError: true,
           failOnWarning: false,
           fix: true,
-          formatter: eslintFriendlyFormatter
+          formatter: eslintFriendlyFormatter,
         },
-        test: /\.js$/
+        test: /\.js$/,
       },
       {
         include: [path.join(ROOT, 'src')],
@@ -52,16 +41,16 @@ module.exports = {
               'env',
               {
                 loose: true,
-                modules: false
-              }
+                modules: false,
+              },
             ],
             'react',
-            'stage-2'
-          ]
+            'stage-2',
+          ],
         },
-        test: /\.js$/
-      }
-    ]
+        test: /\.js$/,
+      },
+    ],
   },
 
   output: {
@@ -69,8 +58,8 @@ module.exports = {
     library: 'flexor',
     libraryTarget: 'umd',
     path: path.join(ROOT, 'dist'),
-    umdNamedDefine: true
+    umdNamedDefine: true,
   },
 
-  plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])]
+  plugins: [new webpack.EnvironmentPlugin(['NODE_ENV'])],
 };

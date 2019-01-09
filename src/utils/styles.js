@@ -10,13 +10,22 @@ import {
   DIRECTION_MAP,
   DISPLAY_MAP,
   JUSTIFY_CONTENT_MAP,
-  WRAP_MAP
+  WRAP_MAP,
 } from '../styles/container';
 import {ALIGN_ITEMS_COLUMN_FIX} from '../styles/flexbugs';
-import {ALIGN_SELF_MAP, DEFAULT_ITEM, GROW_MAP, ORDER_MAP, SHRINK_MAP} from '../styles/item';
+import {
+  ALIGN_SELF_MAP,
+  DEFAULT_ITEM,
+  GROW_MAP,
+  ORDER_MAP,
+  SHRINK_MAP,
+} from '../styles/item';
 
 // utils
-import {fastReduce, getMappedSizePrefixedProperty} from './helpers';
+import {
+  fastReduce,
+  getMappedSizePrefixedProperty,
+} from './helpers';
 
 /**
  * @function createGetDynamicStyle
@@ -30,22 +39,20 @@ import {fastReduce, getMappedSizePrefixedProperty} from './helpers';
  * @param {string} [defaultProp] the default prop to use if standard prop is not found
  * @returns {function(Object): Object} the method to retrieve the style object
  */
-export const createGetDynamicStyle = (map, prefix, prop, defaultProp) => {
-  return (props) => {
-    if (!props.hasOwnProperty(prop)) {
-      return;
-    }
+export const createGetDynamicStyle = (map, prefix, prop, defaultProp) => (props) => {
+  if (!props.hasOwnProperty(prop)) {
+    return;
+  }
 
-    const prefixedProperty = getMappedSizePrefixedProperty(prefix, props[prop]);
+  const prefixedProperty = getMappedSizePrefixedProperty(prefix, props[prop]);
 
-    if (map.hasOwnProperty(prefixedProperty)) {
-      return map[prefixedProperty];
-    }
+  if (map.hasOwnProperty(prefixedProperty)) {
+    return map[prefixedProperty];
+  }
 
-    if (defaultProp) {
-      return map[defaultProp];
-    }
-  };
+  if (defaultProp) {
+    return map[defaultProp];
+  }
 };
 
 /**
@@ -58,24 +65,22 @@ export const createGetDynamicStyle = (map, prefix, prop, defaultProp) => {
  * @param {string} prop the prop retrieved from props
  * @returns {function(Object): Object} the method to get the style
  */
-export const createMapOrPassedStyle = (map, prop) => {
-  return (props) => {
-    if (!props.hasOwnProperty(prop)) {
-      return;
-    }
+export const createMapOrPassedStyle = (map, prop) => (props) => {
+  if (!props.hasOwnProperty(prop)) {
+    return;
+  }
 
-    const value = props[prop];
+  const value = props[prop];
 
-    if (map.hasOwnProperty(value)) {
-      return map[value];
-    }
+  if (map.hasOwnProperty(value)) {
+    return map[value];
+  }
 
-    if (value) {
-      return {
-        [prop]: value
-      };
-    }
-  };
+  if (value) {
+    return {
+      [prop]: value,
+    };
+  }
 };
 
 /**
@@ -105,20 +110,20 @@ export const getAlignItemsStyle = ({alignItems, column}) => {
       ? ALIGN_ITEMS_MAP[alignItems]
       : {
         ...ALIGN_ITEMS_MAP[alignItems],
-        ...ALIGN_ITEMS_COLUMN_FIX
+        ...ALIGN_ITEMS_COLUMN_FIX,
       };
   }
 
   if (alignItems) {
     const style = {
-      alignItems
+      alignItems,
     };
 
     return !column
       ? style
       : {
         ...style,
-        ...ALIGN_ITEMS_COLUMN_FIX
+        ...ALIGN_ITEMS_COLUMN_FIX,
       };
   }
 };
@@ -152,7 +157,7 @@ export const getBasisStyle = (props) => {
   const {basis} = props;
 
   const basisObject = {
-    flexBasis: basis
+    flexBasis: basis,
   };
 
   return basis !== 0 && basis !== '0'
@@ -160,7 +165,7 @@ export const getBasisStyle = (props) => {
     : {
       ...basisObject,
       minHeight: 1,
-      minWidth: 1
+      minWidth: 1,
     };
 };
 
@@ -200,7 +205,7 @@ export const getDirectionStyle = ({column, columnReverse, direction, row, rowRev
 
   if (direction) {
     return {
-      flexDirection: direction
+      flexDirection: direction,
     };
   }
 };
@@ -262,7 +267,7 @@ export const getSizeToOverrideStyles = (props) => {
   const overrideProps = {
     basis: props.sizeTo === 'content' ? 'auto' : props.sizeTo,
     grow: 0,
-    shrink: 0
+    shrink: 0,
   };
 
   return [getBasisStyle(overrideProps), getGrowStyle(overrideProps), getShrinkStyle(overrideProps)];
@@ -281,17 +286,16 @@ export const getSizeToOverrideStyles = (props) => {
  * @param {boolean} isContainer is the component a container component
  * @returns {Array<Object>} the starting styles of the component
  */
-export const getStartingStyles = ({inline, inlineAlign}, defaultStyle, isContainer) => {
-  return !isContainer || !inline
+export const getStartingStyles = ({inline, inlineAlign}, defaultStyle, isContainer) =>
+  !isContainer || !inline
     ? [defaultStyle]
     : [
       {
         ...defaultStyle,
         ...DISPLAY_MAP.inline,
-        ...INLINE_ALIGN_MAP[inlineAlign]
-      }
+        ...INLINE_ALIGN_MAP[inlineAlign],
+      },
     ];
-};
 
 /**
  * @function getWrapStyle
@@ -313,7 +317,7 @@ export const getWrapStyle = ({nowrap, wrap, wrapReverse}) => {
     return wrap === true
       ? WRAP_MAP.wrap
       : {
-        flexWrap: wrap
+        flexWrap: wrap,
       };
   }
 
@@ -338,24 +342,22 @@ export const getWrapStyle = ({nowrap, wrap, wrapReverse}) => {
  * @param {boolean} isContainer are the styles for the container
  * @returns {function(Object): Object} a function that receives the props and returns a merged style object
  */
-export const createGetCompleteStyles = (defaultStyle, transforms, isContainer) => {
-  return (props) => {
-    const styles = fastReduce(
-      transforms,
-      (styles, transform) => {
-        const style = transform(props);
+export const createGetCompleteStyles = (defaultStyle, transforms, isContainer) => (props) => {
+  const styles = fastReduce(
+    transforms,
+    (styles, transform) => {
+      const style = transform(props);
 
-        if (style) {
-          styles.push(style);
-        }
+      if (style) {
+        styles.push(style);
+      }
 
-        return styles;
-      },
-      getStartingStyles(props, defaultStyle, isContainer)
-    );
+      return styles;
+    },
+    getStartingStyles(props, defaultStyle, isContainer)
+  );
 
-    return createCssRule(!props.sizeTo ? styles : [...styles, ...getSizeToOverrideStyles(props)]);
-  };
+  return createCssRule(!props.sizeTo ? styles : [...styles, ...getSizeToOverrideStyles(props)]);
 };
 
 /**

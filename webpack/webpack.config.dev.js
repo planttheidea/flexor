@@ -9,16 +9,14 @@ const PORT = 3000;
 const ROOT = path.join(__dirname, '..');
 
 module.exports = Object.assign({}, defaultConfig, {
-  cache: true,
-
   devServer: {
     compress: true,
     contentBase: './dist',
     host: 'localhost',
     port: PORT,
     watchOptions: {
-      ignored: /node_modules/
-    }
+      ignored: /node_modules/,
+    },
   },
 
   entry: [path.join(ROOT, 'DEV_ONLY', 'index.js')],
@@ -32,14 +30,14 @@ module.exports = Object.assign({}, defaultConfig, {
       }
 
       return Object.assign({}, rule, {
-        include: rule.include.concat([path.join(ROOT, 'DEV_ONLY'), path.join(ROOT, 'examples')])
+        include: rule.include.concat([path.join(ROOT, 'DEV_ONLY'), path.join(ROOT, 'examples')]),
       });
-    })
+    }),
   }),
 
   output: Object.assign({}, defaultConfig.output, {
-    publicPath: `http://localhost:${PORT}/`
+    publicPath: `http://localhost:${PORT}/`,
   }),
 
-  plugins: defaultConfig.plugins.concat([new HtmlWebpackPlugin()])
+  plugins: defaultConfig.plugins.concat([new HtmlWebpackPlugin()]),
 });

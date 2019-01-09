@@ -5,7 +5,10 @@ import moize from 'moize';
 import RuleCache from './RuleCache';
 
 // helpers
-import {fastReduce, merge} from './helpers';
+import {
+  fastReduce,
+  merge,
+} from './helpers';
 
 // options
 import {getOptions} from './options';
@@ -43,9 +46,7 @@ export const ruleCache = new RuleCache();
  * @param {number|string} value the value for the css property
  * @returns {number|string} the value with px applied as suffix if flex-basis
  */
-export const getCleanCssValue = (key, value) => {
-  return FLEX_BASIS_REGEXP.test(key) && +value > 0 ? `${value}px` : value;
-};
+export const getCleanCssValue = (key, value) => (FLEX_BASIS_REGEXP.test(key) && +value > 0 ? `${value}px` : value);
 
 /**
  * @function getCssString
@@ -57,9 +58,7 @@ export const getCleanCssValue = (key, value) => {
  * @param {number|string} value the value of the css entry
  * @returns {string} the key:value; string
  */
-export const getCssString = (key, value) => {
-  return `${key}:${getCleanCssValue(key, value)};`;
-};
+export const getCssString = (key, value) => `${key}:${getCleanCssValue(key, value)};`;
 
 /**
  * @function getHash
@@ -92,9 +91,8 @@ export const getHash = moize((string) => {
  * @param {string} newCss the new css string to add
  * @returns {string} the combined css string
  */
-export const getOrderedCssString = (key, existingCss, newCss) => {
-  return key[0] === '-' ? `${newCss}${existingCss}` : `${existingCss}${newCss}`;
-};
+export const getOrderedCssString = (key, existingCss, newCss) =>
+  key[0] === '-' ? `${newCss}${existingCss}` : `${existingCss}${newCss}`;
 
 /**
  * @function getMergedStyle
@@ -105,9 +103,7 @@ export const getOrderedCssString = (key, existingCss, newCss) => {
  * @param {Array<Object>} styles the array of styles to merge
  * @returns {Object} the merged styles
  */
-export const getMergedStyle = (styles) => {
-  return fastReduce(styles, merge, {});
-};
+export const getMergedStyle = (styles) => fastReduce(styles, merge, {});
 
 /**
  * @function getPrefixedStyleName
@@ -118,9 +114,12 @@ export const getMergedStyle = (styles) => {
  * @param {string} styleName the name of the style to transform
  * @returns {string} the transformed styleName
  */
-export const getPrefixedStyleName = moize((styleName) => {
-  return styleName.replace(UPPERCASE_REGEXP, '-$1').toLowerCase().replace(MS_PREFIX_REGEXP, '-ms-');
-});
+export const getPrefixedStyleName = moize((styleName) =>
+  styleName
+    .replace(UPPERCASE_REGEXP, '-$1')
+    .toLowerCase()
+    .replace(MS_PREFIX_REGEXP, '-ms-')
+);
 
 /**
  * @function getStyleAsCssString
@@ -131,8 +130,8 @@ export const getPrefixedStyleName = moize((styleName) => {
  * @param {Object} style the style object to process
  * @returns {string} the style object as a compiled css string
  */
-export const getStyleAsCssString = moize((style) => {
-  return fastReduce(
+export const getStyleAsCssString = moize((style) =>
+  fastReduce(
     Object.keys(style),
     (css, key) => {
       const hyphenatedKey = getPrefixedStyleName(key);
@@ -140,17 +139,15 @@ export const getStyleAsCssString = moize((style) => {
         ? getCssString(hyphenatedKey, style[key])
         : fastReduce(
           style[key],
-          (css, prefixedValue) => {
-            return getOrderedCssString(hyphenatedKey, css, getCssString(hyphenatedKey, prefixedValue));
-          },
+          (css, prefixedValue) => getOrderedCssString(hyphenatedKey, css, getCssString(hyphenatedKey, prefixedValue)),
           ''
         );
 
       return getOrderedCssString(hyphenatedKey, css, cssString);
     },
     ''
-  );
-});
+  )
+);
 
 /**
  * @function addFlexbugRules
@@ -198,6 +195,6 @@ export const createCssRule = (styles) => {
 
   return {
     [type]: '',
-    [uniqueKey]: ''
+    [uniqueKey]: '',
   };
 };
