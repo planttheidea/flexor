@@ -14,7 +14,7 @@ const INTERNAL_PROPS = {
   grow: true,
   order: true,
   shrink: true,
-  sizeTo: true
+  sizeTo: true,
 };
 
 class FlexItem extends PureComponent {
@@ -28,11 +28,11 @@ class FlexItem extends PureComponent {
     grow: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string]),
     order: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     shrink: PropTypes.oneOfType([PropTypes.bool, PropTypes.number, PropTypes.string]),
-    sizeTo: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    sizeTo: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   };
 
   static defaultProps = {
-    element: 'div'
+    element: 'div',
   };
 
   render() {

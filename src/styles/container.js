@@ -6,7 +6,7 @@ import {getMappedStyles} from '../utils/helpers';
  */
 export const DISPLAY_MAP = getMappedStyles('display', {
   default: 'flex',
-  inline: 'inline-flex'
+  inline: 'inline-flex',
 });
 
 /**
@@ -16,7 +16,7 @@ export const DIRECTION_MAP = getMappedStyles('flexDirection', {
   column: 'column',
   columnReverse: 'column-reverse',
   row: 'row',
-  rowReverse: 'row-reverse'
+  rowReverse: 'row-reverse',
 });
 
 /**
@@ -25,7 +25,7 @@ export const DIRECTION_MAP = getMappedStyles('flexDirection', {
 export const WRAP_MAP = getMappedStyles('flexWrap', {
   nowrap: 'nowrap',
   wrap: 'wrap',
-  wrapReverse: 'wrap-reverse'
+  wrapReverse: 'wrap-reverse',
 });
 
 /**
@@ -36,7 +36,7 @@ export const JUSTIFY_CONTENT_MAP = getMappedStyles('justifyContent', {
   between: 'space-between',
   center: 'center',
   end: 'flex-end',
-  start: 'flex-start'
+  start: 'flex-start',
 });
 
 /**
@@ -46,7 +46,7 @@ export const INLINE_ALIGN_MAP = getMappedStyles('verticalAlign', {
   baseline: 'baseline',
   bottom: 'bottom',
   center: 'center',
-  top: 'top'
+  top: 'top',
 });
 
 /**
@@ -58,7 +58,7 @@ export const ALIGN_CONTENT_MAP = getMappedStyles('alignContent', {
   center: 'center',
   end: 'flex-end',
   start: 'flex-start',
-  stretch: 'stretch'
+  stretch: 'stretch',
 });
 
 /**
@@ -69,7 +69,7 @@ export const ALIGN_ITEMS_MAP = getMappedStyles('alignItems', {
   center: 'center',
   end: 'flex-end',
   start: 'flex-start',
-  stretch: 'stretch'
+  stretch: 'stretch',
 });
 
 /**
@@ -82,5 +82,5 @@ export const DEFAULT_CONTAINER = {
   ...DIRECTION_MAP.row,
   ...WRAP_MAP.nowrap,
   ...JUSTIFY_CONTENT_MAP.start,
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
 };

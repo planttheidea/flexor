@@ -5,7 +5,7 @@ import prefixAll from 'inline-style-prefixer/static';
 let options = {
   debug: false,
   fixFlexbugs: true,
-  prefix: moize.serialize(prefixAll)
+  prefix: moize.serialize(prefixAll),
 };
 
 /**
@@ -16,9 +16,7 @@ let options = {
  *
  * @returns {Object} the global options
  */
-export const getOptions = () => {
-  return options;
-};
+export const getOptions = () => options;
 
 /**
  * @function setOptions

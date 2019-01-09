@@ -1,5 +1,8 @@
 // utils
-import {getMappedSizeStyles, getMappedStyles} from '../utils/helpers';
+import {
+  getMappedSizeStyles,
+  getMappedStyles,
+} from '../utils/helpers';
 
 /**
  * @constant {Array<number>} VALID_ORDER_SIZES
@@ -20,7 +23,7 @@ export const ALIGN_SELF_MAP = getMappedStyles('alignSelf', {
   center: 'center',
   end: 'flex-end',
   start: 'flex-start',
-  stretch: 'stretch'
+  stretch: 'stretch',
 });
 
 // grow values
@@ -53,5 +56,5 @@ export const DEFAULT_ITEM = {
   ...GROW_MAP.GROW_1,
   ...SHRINK_MAP.SHRINK_1,
   boxSizing: 'border-box',
-  flexBasis: '0%'
+  flexBasis: '0%',
 };

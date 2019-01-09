@@ -33,9 +33,7 @@ export default class RuleCache {
   _addRuleDebug(key, css) {
     const prettyCss = fastReduce(
       css.split(';'),
-      (allRules, rule) => {
-        return rule ? `${allRules}\n  ${rule.replace(':', ': ')};` : allRules;
-      },
+      (allRules, rule) => (rule ? `${allRules}\n  ${rule.replace(':', ': ')};` : allRules),
       ''
     );
 

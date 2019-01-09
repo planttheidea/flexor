@@ -14,12 +14,12 @@ const INTERNAL_PROPS = {
   columnReverse: true,
   direction: true,
   element: true,
-  justifyContent: true,
   inline: true,
   inlineAlign: true,
+  justifyContent: true,
   row: true,
   rowReverse: true,
-  wrap: true
+  wrap: true,
 };
 
 class FlexContainer extends PureComponent {
@@ -33,16 +33,16 @@ class FlexContainer extends PureComponent {
     columnReverse: PropTypes.bool,
     direction: PropTypes.string,
     element: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    justifyContent: PropTypes.string,
     inline: PropTypes.bool,
     inlineAlign: PropTypes.string,
+    justifyContent: PropTypes.string,
     row: PropTypes.bool,
     rowReverse: PropTypes.bool,
-    wrap: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
+    wrap: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   };
 
   static defaultProps = {
-    element: 'div'
+    element: 'div',
   };
 
   render() {

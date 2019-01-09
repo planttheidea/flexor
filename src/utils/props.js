@@ -11,8 +11,8 @@ import {fastReduce} from './helpers';
  * @param {Object} internalPropTypes the object of propTypes to compare to
  * @returns {{internal: Object, remaining: Object}} the split prop types
  */
-export const getSplitProps = (props, internalPropTypes) => {
-  return fastReduce(
+export const getSplitProps = (props, internalPropTypes) =>
+  fastReduce(
     Object.keys(props),
     (splitProps, prop) => {
       const subObject = internalPropTypes[prop] ? splitProps.internal : splitProps.remaining;
@@ -23,7 +23,6 @@ export const getSplitProps = (props, internalPropTypes) => {
     },
     {
       internal: {},
-      remaining: {}
+      remaining: {},
     }
   );
-};
